@@ -76,7 +76,7 @@ def get_db():
 
 
 @app.get("/event/{id}")
-def get_event(id: int, db: Session = Depends(get_db)):
+def get_event(id: int, db: Session = Depends(get_db), user=Depends(manager)):
     db_event = crud.get_event(db, id)
     if not db_event:
         raise HTTPException(status_code=404, detail="Event not found")
@@ -84,7 +84,8 @@ def get_event(id: int, db: Session = Depends(get_db)):
 
 
 @app.get("/events")
-def get_events(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_events(skip: int = 0, limit: int = 100, db: Session = Depends(get_db),
+               user=Depends(manager)):
     db_events = crud.get_events(db, skip=skip, limit=limit)
     return db_events
 
@@ -99,7 +100,8 @@ def create_event(event: schemas.Event, db: Session = Depends(get_db),
 
 
 @app.patch("/event", response_model=schemas.Event)
-def update_event(event: schemas.Event, db: Session = Depends(get_db)):
+def update_event(event: schemas.Event, db: Session = Depends(get_db),
+                 user=Depends(manager)):
     db_event = crud.update_event(db, event)
     if not db_event:
         raise HTTPException(status_code=400, detail="Failed to update event")
@@ -107,5 +109,6 @@ def update_event(event: schemas.Event, db: Session = Depends(get_db)):
 
 
 @app.delete("/event/{id}")
-def delete_event(id: int, db: Session = Depends(get_db)):
+def delete_event(id: int, db: Session = Depends(get_db),
+                 user=Depends(manager)):
     return crud.delete_event(db, id)
