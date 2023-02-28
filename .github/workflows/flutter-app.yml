@@ -1,13 +1,10 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Flutter application
 
 on:
   push:
-    branches: ["main", "tests/front", "tests/action-front"]
+    branches: ["main"]
   pull_request:
-    branches: ["main", "tests/front", "tests/action-front"]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -44,7 +41,7 @@ jobs:
       - name: Install and set Flutter version
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.7.3"
+          flutter-version: "3.7.5"
           channel: "stable"
       - name: Install dependencies
         run: |

@@ -1,0 +1,43 @@
+name: Build apk
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+          cache: "gradle"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.5"
+          channel: "stable"
+          cache: true
+      - name: Test and build apk
+        working-directory: front/my_app
+        run: |
+          flutter pub get
+          flutter test test/unit_test.dart
+          flutter build apk
+          flutter build appbundle
+          flutter build web
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: front/my_app/build/app/outputs/apk/release/app-release.apk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-web
+          path: front/my_app/build/web
+
