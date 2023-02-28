@@ -1,3 +1,4 @@
+from datetime import timedelta
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +16,46 @@ models.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
+
+
+DB = {
+    'users': {
+        'johndoe@mail.com': {
+            'name': 'John Doe',
+            'password': 'hunter2'
+        }
+    }
+}
+
+
+SECRET = "super-secret-key"
+manager = LoginManager(SECRET, '/login', default_expiry=timedelta(hours=12))
+
+
+@manager.user_loader()
+def query_user(user_id: str):
+    return DB['users'].get(user_id)
+
+
+@app.post("/login")
+def login(data: OAuth2PasswordRequestForm = Depends()):
+    email = data.username
+    password = data.password
+
+    user = query_user(email)
+    if not user:
+        raise InvalidCredentialsException
+    elif password != user['password']:
+        raise InvalidCredentialsException
+
+    access_token = manager.create_access_token(
+        data={'sub': email},
+        expires=timedelta(hours=12)
+    )
+
+    print(data.__dict__)
+
+    return {'access_token': access_token}
 
 
 app.add_middleware(
@@ -49,7 +90,8 @@ def get_events(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @app.post("/event", response_model=schemas.Event)
-def create_event(event: schemas.Event, db: Session = Depends(get_db)):
+def create_event(event: schemas.Event, db: Session = Depends(get_db),
+                 user=Depends(manager)):
     db_event = crud.get_event(db, event.id)
     if db_event:
         raise HTTPException(status_code=400, detail="Event already exists")
@@ -67,42 +109,3 @@ def update_event(event: schemas.Event, db: Session = Depends(get_db)):
 @app.delete("/event/{id}")
 def delete_event(id: int, db: Session = Depends(get_db)):
     return crud.delete_event(db, id)
-
-
-DB = {
-    'users': {
-        'johndoe@mail.com': {
-            'name': 'John Doe',
-            'password': 'hunter2'
-        }
-    }
-}
-
-
-SECRET = "super-secret-key"
-manager = LoginManager(SECRET, '/login')
-
-
-@manager.user_loader()
-def query_user(user_id: str):
-    return DB['users'].get(user_id)
-
-
-@app.post("/login")
-def login(data: OAuth2PasswordRequestForm = Depends()):
-    email = data.username
-    password = data.password
-
-    user = query_user(email)
-    if not user:
-        raise InvalidCredentialsException
-    elif password != user['password']:
-        raise InvalidCredentialsException
-
-    access_token = manager.create_access_token(
-        data={'sub': email}
-    )
-
-    print(data.__dict__)
-
-    return {'access_token': access_token}
