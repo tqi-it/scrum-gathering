@@ -1,0 +1,35 @@
+version: "3"
+services:
+  database-dev:
+    image: postgres:14-alpine
+    container_name: database-dev
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: database
+  # front-dev:
+  #   image: front-dev
+  #   build:
+  #     context: ./front
+  #   container_name: front-dev
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./front/my_app:/home/my_app
+  #   restart: always
+  #   depends_on:
+  #     - database-dev
+  # back-dev:
+  #   image: back-dev
+  #   build:
+  #     context: ./back
+  #   container_name: back-dev
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./back:/back
+  #   restart: always
+  #   depends_on:
+  #     - database-dev

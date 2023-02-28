@@ -1,0 +1,63 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: ["main", "tests/front", "tests/action-front"]
+  pull_request:
+    branches: ["main", "tests/front", "tests/action-front"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: pass
+          POSTGRES_DB: database
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.7.3"
+          channel: "stable"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r back/app/requirements.txt
+      - name: Restore packages
+        working-directory: front/my_app
+        run: flutter pub get
+      - name: Run uvicorn
+        run: |
+          export PYTHONPATH="back/app"
+          nohup uvicorn back.app.main:app --host 0.0.0.0 --port 8000 --reload &
+      - name: Flutter test
+        working-directory: front/my_app/test
+        run: |
+          flutter test unit_test.dart

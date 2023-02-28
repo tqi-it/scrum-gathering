@@ -1,0 +1,44 @@
+version: "3"
+services:
+  database-dev:
+    image: postgres:14-alpine
+    container_name: database-dev
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: database
+    # Check if service is healthy and database "database" is created
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "database"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  front-dev:
+    image: front-dev
+    build:
+      context: ../front
+    container_name: front-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../:/workspace:cached
+      - ../front:/front
+    # restart: always
+    depends_on:
+      - back-dev
+  back-dev:
+    image: back-dev
+    build:
+      context: ../back
+    container_name: back-dev
+    ports:
+      - "8000:8000"
+    environment:
+      DEV_CONTAINERS: true
+    volumes:
+      - ../back:/back
+    # restart: always
+    depends_on:
+      - database-dev
