@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Response, status
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_login import LoginManager
@@ -10,6 +10,7 @@ from fastapi_login.exceptions import InvalidCredentialsException
 import crud
 import models
 import schemas
+import login as login_user
 from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -112,3 +113,11 @@ def update_event(event: schemas.Event, db: Session = Depends(get_db),
 def delete_event(id: int, db: Session = Depends(get_db),
                  user=Depends(manager)):
     return crud.delete_event(db, id)
+
+
+@app.post("/users", response_model=schemas.UserResponse)
+def create_user(user: schemas.User, db: Session = Depends(get_db)):
+    db_user = login_user.get_user(db=db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="E-mail already register")
+    return login_user.create_user(db=db, user=user)

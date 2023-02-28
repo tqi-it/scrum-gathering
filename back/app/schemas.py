@@ -11,3 +11,22 @@ class Event(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class User(BaseModel):
+    id: int
+    name: str
+    email: str
+    hashedPassword: str
+
+    class Config:
+        orm_mode = True
+
+
+class UserResponse(BaseModel):
+    id: int
+    name: str
+    email: str
+
+    class Config:
+        orm_mode = True
