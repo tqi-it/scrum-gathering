@@ -1,15 +1,20 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, Response, status
 
-import models, schemas
+import models
+import schemas
 
 from datetime import datetime
+
 
 def get_event(db: Session, event_id: int):
     return db.query(models.Event).filter(models.Event.id == event_id).first()
 
+
 def get_events(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Event).order_by(models.Event.id.asc()).offset(skip).limit(limit).all()
+    return db.query(models.Event).order_by(
+        models.Event.id.asc()).offset(skip).limit(limit).all()
+
 
 def create_event(db: Session, event: schemas.Event):
     db_event = models.Event(name=event.name, city=event.city,
@@ -19,6 +24,7 @@ def create_event(db: Session, event: schemas.Event):
     db.refresh(db_event)
     return db_event
 
+
 def update_event(db: Session, event: schemas.Event):
     db_query = db.query(models.Event).filter(models.Event.id == event.id)
     db_query.update(dict(event))
@@ -26,6 +32,7 @@ def update_event(db: Session, event: schemas.Event):
     db.commit()
     db.refresh(db_event)
     return db_event
+
 
 def delete_event(db: Session, event_id: int):
     db_query = db.query(models.Event).filter(models.Event.id == event_id)
