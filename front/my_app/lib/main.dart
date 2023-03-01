@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const HomePage(title: 'Mentorme'),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
