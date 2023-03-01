@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(title: "Mentorme", factor: 2),
+      appBar: const AppBarWidget(title: "Mentorme", factor: 4),
       body: Container(),
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
