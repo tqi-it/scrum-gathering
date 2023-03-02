@@ -1,18 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/entity/entity_mentor.dart';
 import 'package:my_app/widgets/widget_bottom_navigation_bar.dart';
 import 'package:my_app/widgets/widget_featured_profile.dart';
-
-import '../widgets/widget_mentor_card.dart';
-
-// final String name;
-// final String skill;
-// final String profile;
-// final String imageProfile;
-// final String availability;
-// final String slots;
-// final int likes;
-// final double rate;
+import 'package:my_app/widgets/widget_mentor_card.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key, required this.title});
@@ -70,8 +61,33 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 5),
-                  MentorCardWidget(
-                    mentor: mentor,
+                  SizedBox(
+                    height: 120,
+                    child: ListView(padding: EdgeInsets.all(0), children: [
+                      CarouselSlider(
+                        items: [
+                          MentorCardWidget(
+                            mentor: mentor,
+                          ),
+                          MentorCardWidget(
+                            mentor: mentor,
+                          ),
+                          MentorCardWidget(
+                            mentor: mentor,
+                          ),
+                        ],
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: 0.8,
+                        ),
+                      ),
+                    ]),
                   ),
                 ],
               ),
