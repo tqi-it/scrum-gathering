@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/pages/page_form.dart';
 import 'package:my_app/pages/page_home.dart';
 
 void main() async {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => HomePage(title: 'Mentorme'),
+        "/": (context) => const FormPage(title: 'Mentorme'),
+        // "/": (context) => HomePage(title: 'Mentorme'),
       },
       debugShowCheckedModeBanner: false,
     );
