@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class FeaturedProfileWidget extends StatelessWidget {
-  const FeaturedProfileWidget(
-      {super.key,
-      required this.name,
-      required this.skill,
-      required this.link,
-      required this.imageLink});
+import '../entity/entity_mentor.dart';
 
-  final String name, skill, link, imageLink;
+class FeaturedProfileWidget extends StatelessWidget {
+  const FeaturedProfileWidget({
+    super.key,
+    required this.mentor,
+  });
+
+  final MentorEntity mentor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,8 @@ class FeaturedProfileWidget extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(imageLink), fit: BoxFit.fitWidth),
+                    image: NetworkImage(mentor.imageProfile),
+                    fit: BoxFit.fitWidth),
                 borderRadius: const BorderRadius.all(Radius.circular(6))),
             child: Container(
               padding: EdgeInsets.all(15),
@@ -35,11 +36,11 @@ class FeaturedProfileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    skill,
+                    mentor.skill,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   Text(
-                    name,
+                    mentor.name,
                     style: TextStyle(color: Colors.white, fontSize: 30),
                   ),
                   ElevatedButton(
@@ -58,11 +59,3 @@ class FeaturedProfileWidget extends StatelessWidget {
     );
   }
 }
-
-    //  child: const Card(
-    //     color: Colors.transparent,
-    //     shadowColor: Colors.transparent,
-    //     child: const Text(
-    //       "oi",
-    //       style: TextStyle(color: Colors.white),
-    //     ),
