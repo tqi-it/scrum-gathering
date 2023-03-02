@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/widget_featured_profile.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, required this.title, required this.factor});
@@ -34,7 +33,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
-      bottom: const FeaturedProfileWidget(),
     );
   }
 }
