@@ -1,37 +1,57 @@
 import 'package:flutter/material.dart';
 
-class FeaturedProfileWidget extends StatelessWidget
-    implements PreferredSizeWidget {
-  const FeaturedProfileWidget({super.key});
+class FeaturedProfileWidget extends StatelessWidget {
+  const FeaturedProfileWidget(
+      {super.key,
+      required this.name,
+      required this.skill,
+      required this.link,
+      required this.imageLink});
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 2);
+  final String name, skill, link, imageLink;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Perfil em destaque"),
+        const Text(
+          "Perfil em destaque",
+          style: TextStyle(color: Colors.white, fontSize: 12),
+        ),
+        const SizedBox(height: 14),
         Container(
-          height: 200,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage("https://picsum.photos/id/237/200/300"),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
-              Text(
-                "Agilidade",
-                style: TextStyle(color: Colors.white),
+          child: Container(
+            height: 204,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(imageLink), fit: BoxFit.fitWidth),
+                borderRadius: const BorderRadius.all(Radius.circular(6))),
+            child: Container(
+              padding: EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    skill,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Text(
+                    name,
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text("Visualizar perfil"),
+                  )
+                ],
               ),
-              Text(
-                "Beltrano Ferreira",
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
+            ),
           ),
         ),
       ],
