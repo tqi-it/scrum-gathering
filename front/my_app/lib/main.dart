@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => const FormPage(title: 'Mentorme'),
+        "/": (context) => FormPage(title: 'Mentorme'),
         // "/": (context) => HomePage(title: 'Mentorme'),
       },
       debugShowCheckedModeBanner: false,
