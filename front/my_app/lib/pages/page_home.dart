@@ -1,5 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/page_base.dart';
 import 'package:my_app/widgets/widget_bottom_navigation_bar.dart';
 
 import '../widgets/widget_appbar_home.dart';
@@ -12,13 +12,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const AppBarHomeWidget(
+    return BasePage(
+      appBarWidget: const AppBarHomeWidget(
         title: "Mentorme",
       ),
-      body: MentorSlideWidget(),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bodyWidget: MentorSlideWidget(),
+      bottomNavigationBarWidget: const BottomNavigationBarWidget(),
     );
   }
 }

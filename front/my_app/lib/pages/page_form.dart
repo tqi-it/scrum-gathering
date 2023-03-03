@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/page_base.dart';
 
 import '../widgets/widget_appbar_form.dart';
 import '../widgets/widget_body_form.dart';
 import '../widgets/widget_bottom_navigation_bar_form.dart';
-import '../widgets/widget_bottom_navigation_bar_form.dart';
 
 class FormPage extends StatefulWidget {
-  FormPage({super.key, required this.title});
+  const FormPage({super.key, required this.title});
 
   final String title;
 
@@ -17,11 +17,10 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBarFormWidget(title: "Adicionar Skills"),
-      body: BodyFormWidget(),
-      bottomNavigationBar: BottomNavigationBarFormWidget(),
+    return const BasePage(
+      appBarWidget: AppBarFormWidget(title: "Adicionar Skills"),
+      bodyWidget: BodyFormWidget(),
+      bottomNavigationBarWidget: BottomNavigationBarFormWidget(),
     );
   }
 }

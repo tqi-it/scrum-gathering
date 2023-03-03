@@ -21,70 +21,58 @@ class MentorSlideWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromARGB(204, 10, 125, 184),
-            Color.fromARGB(204, 0, 40, 60)
-          ],
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.fromLTRB(15, 50, 15, 20),
+          child: FeaturedProfileWidget(mentor: mentor),
         ),
-      ),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.fromLTRB(15, 50, 15, 20),
-            child: FeaturedProfileWidget(mentor: mentor),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            color: Color(0xFFEBF0FF),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Visualizados Recentemente",
-                  style: TextStyle(
-                      color: Color(0xFF535353),
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 5),
-                SizedBox(
-                  height: 120,
-                  child: ListView(padding: EdgeInsets.all(0), children: [
-                    CarouselSlider(
-                      items: [
-                        MentorCardWidget(
-                          mentor: mentor,
-                        ),
-                        MentorCardWidget(
-                          mentor: mentor,
-                        ),
-                        MentorCardWidget(
-                          mentor: mentor,
-                        ),
-                      ],
-                      options: CarouselOptions(
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.8,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          color: Color(0xFFEBF0FF),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Visualizados Recentemente",
+                style: TextStyle(
+                    color: Color(0xFF535353),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 5),
+              SizedBox(
+                height: 120,
+                child: ListView(padding: EdgeInsets.all(0), children: [
+                  CarouselSlider(
+                    items: [
+                      MentorCardWidget(
+                        mentor: mentor,
                       ),
+                      MentorCardWidget(
+                        mentor: mentor,
+                      ),
+                      MentorCardWidget(
+                        mentor: mentor,
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      aspectRatio: 16 / 9,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enableInfiniteScroll: true,
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      viewportFraction: 0.8,
                     ),
-                  ]),
-                ),
-              ],
-            ),
+                  ),
+                ]),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
