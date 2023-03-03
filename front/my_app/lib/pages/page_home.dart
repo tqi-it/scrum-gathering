@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePage(
       appBarWidget: const AppBarHomeWidget(
-        title: "Mentorme",
+        title: "Criar Perfil",
       ),
       bodyWidget: MentorSlideWidget(),
       bottomNavigationBarWidget: const BottomNavigationBarWidget(),

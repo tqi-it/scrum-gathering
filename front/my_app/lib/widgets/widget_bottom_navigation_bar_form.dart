@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigationBarFormWidget extends StatelessWidget {
-  const BottomNavigationBarFormWidget({super.key});
+  const BottomNavigationBarFormWidget({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +15,9 @@ class BottomNavigationBarFormWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           minimumSize: const Size.fromHeight(50),
         ),
-        child: const Text(
-          "Salvar",
-          style: TextStyle(fontSize: 20),
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 20),
         ),
       ),
     );

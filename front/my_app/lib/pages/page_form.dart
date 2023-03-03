@@ -20,7 +20,9 @@ class _FormPageState extends State<FormPage> {
     return const BasePage(
       appBarWidget: AppBarFormWidget(title: "Adicionar Skills"),
       bodyWidget: BodyFormWidget(),
-      bottomNavigationBarWidget: BottomNavigationBarFormWidget(),
+      bottomNavigationBarWidget: BottomNavigationBarFormWidget(
+        title: "Salvar",
+      ),
     );
   }
 }
