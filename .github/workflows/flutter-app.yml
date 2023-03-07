@@ -2,9 +2,13 @@ name: Flutter application
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+    paths:
+      -  'front/**'
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
+    paths:
+    -  'front/**'
 
 permissions:
   contents: read
