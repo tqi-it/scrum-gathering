@@ -28,6 +28,7 @@ public class Contact {
 	@JoinColumn(name = "id_person", referencedColumnName = "id", columnDefinition = "id_person")
 	private Person person;
 	
-	
+	@Column(name = "value")
+	private String value;
 
 }

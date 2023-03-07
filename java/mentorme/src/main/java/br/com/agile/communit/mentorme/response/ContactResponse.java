@@ -10,8 +10,8 @@ import lombok.Data;
 public class ContactResponse {
     @JsonProperty("id")
     private Integer id;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("description")
-    private String description;
+    @JsonProperty("value")
+    private String value;
+    @JsonProperty("type")
+    private String type;
 }
