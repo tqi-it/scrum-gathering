@@ -24,6 +24,9 @@ public class Person {
     @Column(name = "id", nullable = false)
 	@GeneratedValue( strategy=GenerationType.AUTO )
 	private Integer id;
+
+	@Column(name = "name")
+	private String name;
 	
     @Column(name = "mini_bio")
 	private String miniBio;
