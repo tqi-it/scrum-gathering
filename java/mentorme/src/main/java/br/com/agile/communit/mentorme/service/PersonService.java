@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import br.com.agile.communit.mentorme.model.Person;
 import br.com.agile.communit.mentorme.repository.PersonRepository;
+import br.com.agile.communit.mentorme.request.PersonRequest;
 import br.com.agile.communit.mentorme.response.PersonResponse;
 import lombok.RequiredArgsConstructor;
 
@@ -26,5 +28,11 @@ public class PersonService {
         return personRepository.findByWantToLearn(true).orElse(new ArrayList<>())
                 .stream().map(PersonResponse::entityToResponse)
                 .collect(Collectors.toList());
+    }
+    
+    public PersonResponse save(PersonRequest personRequest) {
+    	Person person = personRepository.save(PersonRequest.requestToEntity(personRequest));
+    	
+    	return PersonResponse.entityToResponse(person);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import org.springframework.stereotype.Service;
 
 import br.com.agile.communit.mentorme.model.ContactHistory;
+import br.com.agile.communit.mentorme.model.Person;
 import br.com.agile.communit.mentorme.repository.ContactHistoryRepository;
 import br.com.agile.communit.mentorme.request.ContactHistoryRequest;
 import br.com.agile.communit.mentorme.request.PersonRequest;
@@ -20,8 +21,8 @@ public class ContactHistoryService {
 	public ContactHistoryResponse registerContactHistory(ContactHistoryRequest request) {
 
 		ContactHistory contactHistory = contactHistoryRepository
-				.save(ContactHistory.builder().from(PersonRequest.requestToEntity(request.getFrom()))
-						.to(PersonRequest.requestToEntity(request.getTo())).contactType(request.getContactType())
+				.save(ContactHistory.builder().from(Person.builder().id(request.getPersonFrom()).build())
+						.to(Person.builder().id(request.getPersonTo()).build()).contactType(request.getContactType())
 						.contactValue(request.getContactValue()).when(Calendar.getInstance().getTime()).build());
 
 		return ContactHistoryResponse.builder().id(contactHistory.getId()).build();

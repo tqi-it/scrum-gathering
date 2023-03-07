@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class ContactHistoryRequest {
 
-	@JsonProperty
-	private PersonRequest from;
-	@JsonProperty
-	private PersonRequest to;
+	@JsonProperty("person_from")
+	private Integer personFrom;
+	@JsonProperty("person_to")
+	private Integer personTo;
 	@JsonProperty
 	private String contactValue;
 	@JsonProperty
