@@ -33,7 +33,12 @@ def get_person(id: int):
 @app.post("/")
 def create_person(person: schemas.Person, db: Session = Depends(get_db)):
     db_person = crud.create_person(db, person)
-    return "hello"
+    return db_person
+
+@app.post("/contact")
+def create_contact(contact: schemas.Contact, db: Session = Depends(get_db)):
+    db_contact = crud.create_contact(db, contact, person_id=1000101)
+    return db_contact
 
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):

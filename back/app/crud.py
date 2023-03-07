@@ -13,26 +13,29 @@ def get_person(id: int):
 
 def create_person(db: Session, person: schemas.Person):
     db_person = models.Person(
-        id=1000, 
         name=person.name, 
         mini_bio=person.mini_bio, 
         can_teach=True, 
         want_to_learn=False)
-    db_contact_type = models.ContactType(id=1010, type="whatsapp")
-    db.add(db_contact_type)
-    db.commit()
-    db.refresh(db_contact_type)
     db.add(db_person)
     db.commit()
     db.refresh(db_person)
-    db_contact = models.Contact(
-        id=100, contact_type_id=db_contact_type.id,
-        type=db_contact_type, value="11999999999",
-        person_id=db_person.id)
+    return (db_person)
+
+def create_contact(db: Session, contact: schemas.Contact, person_id: int):
+    db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == "whatsapp").first()
+    if db_contact_type == None:
+        db_contact_type = models.ContactType(type="whatsapp")
+        db_contact = models.Contact(contact_type_id=db_contact_type.id,
+            type=db_contact_type, value="11999999999", person_id=person_id)
+    else:
+        db_contact = models.Contact(contact_type_id=db_contact_type.id,
+            type=db_contact_type, value="11999999999", person_id=person_id)
     db.add(db_contact)
     db.commit()
     db.refresh(db_contact)
-    return (db_person)
+    return db_contact
+
 
 # def get_event(db: Session, event_id: int):
 #     return db.query(models.Event).filter(models.Event.id == event_id).first()
