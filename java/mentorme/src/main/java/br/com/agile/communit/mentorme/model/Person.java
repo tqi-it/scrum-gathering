@@ -17,21 +17,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PERSON")
+@Table(name = "person")
 public class Person {
 	
 	@Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
 	@GeneratedValue( strategy=GenerationType.AUTO )
 	private Integer id;
 	
-    @Column(name = "MINI_BIO")
+    @Column(name = "mini_bio")
 	private String miniBio;
 	
-    @Column(name = "CAN_TEACH")
+    @Column(name = "can_teach")
 	private boolean canTeach;
 	
-    @Column(name = "WANT_TO_LEARN")
+    @Column(name = "want_to_learn")
 	private boolean wantToLearn;
 	
 }

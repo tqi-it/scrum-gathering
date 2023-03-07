@@ -17,18 +17,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "SKILL")
+@Table(name = "skill")
 public class Skill {
 	
 	@Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
 	@GeneratedValue( strategy=GenerationType.AUTO )
 	private Integer id;
 	
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
 	private String description;
 	
-    @Column(name = "LABEL")
+    @Column(name = "label")
 	private boolean label;
 
 }

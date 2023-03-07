@@ -15,15 +15,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CONTACT_TYPE")
+@Table(name = "contact_type")
 public class ContactType {
 	
 	@Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
 	private Integer id;
-	
-	@Id
-    @Column(name = "TYPE")
+
+    @Column(name = "type")
 	private String type;
 
 }
