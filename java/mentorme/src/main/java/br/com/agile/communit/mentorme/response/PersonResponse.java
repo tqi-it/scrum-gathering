@@ -1,8 +1,9 @@
 package br.com.agile.communit.mentorme.response;
 
-import br.com.agile.communit.mentorme.model.Person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import br.com.agile.communit.mentorme.model.Person;
 import lombok.Builder;
 import lombok.Data;
 

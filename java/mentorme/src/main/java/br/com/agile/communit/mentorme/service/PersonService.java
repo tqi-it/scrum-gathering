@@ -1,15 +1,15 @@
 package br.com.agile.communit.mentorme.service;
 
-import br.com.agile.communit.mentorme.exception.NotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import br.com.agile.communit.mentorme.repository.PersonRepository;
 import br.com.agile.communit.mentorme.response.PersonResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor

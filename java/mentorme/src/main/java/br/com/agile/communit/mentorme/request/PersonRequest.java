@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.agile.communit.mentorme.model.Person;
-import br.com.agile.communit.mentorme.response.PersonResponse;
 import lombok.Data;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class PersonRequest {
 	
+	@JsonProperty("id")
+    private Integer id;
 	@JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -24,12 +25,9 @@ public class PersonRequest {
     @JsonProperty("image")
     private byte[] image;
     
-    public static Person entityToResponse(PersonRequest request) {
+    public static Person requestToEntity(PersonRequest request) {
         return Person.builder()
-                .canTeach(request.isCanTeach())
-                .miniBio(request.getDescription())
-                .name(request.getName())
-                .wantToLearn(request.isWantToLearn())
+                .id(request.id)
                 .build();
     }
     
