@@ -25,9 +25,11 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/{id}")
-def get_person(id: int):
-    db_person = crud.get_person(id)
+@app.get("/person/{id}")
+def get_person(id: int, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, id)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="Person not found")
     return db_person
 
 @app.post("/")

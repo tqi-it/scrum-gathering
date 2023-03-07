@@ -7,8 +7,8 @@ import schemas
 from datetime import datetime
 
 
-def get_person(id: int):
-    return "hello world"
+def get_person(db: Session, person_id: int):
+    return db.query(models.Person).filter(models.Person.id == person_id).first()
 
 
 def create_person(db: Session, person: schemas.Person):
