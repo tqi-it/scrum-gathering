@@ -32,21 +32,22 @@ def get_person(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Person not found")
     return db_person
 
-@app.get("/person/contact/{id}")
-def get_contact(id: int, db: Session = Depends(get_db)):
-    db_contact = crud.get_contact(db, id)
-    if not db_contact:
-        raise HTTPException(status_code=404, detail="Contact not found")
-    return db_contact
 
-
-@app.post("/")
+@app.post("/person")
 def create_person(person: schemas.Person, db: Session = Depends(get_db)):
     db_person = crud.get_person(db, person.id)
     if db_person:
         raise HTTPException(status_code=400, detail="Person already exists")
     db_person = crud.create_person(db, person)
     return db_person
+
+
+@app.get("/person/contact/{id}")
+def get_contact(id: int, db: Session = Depends(get_db)):
+    db_contact = crud.get_contact(db, id)
+    if not db_contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
+    return db_contact
 
 @app.post("/contact")
 def create_contact(contact: schemas.Contact, person_id: int, db: Session = Depends(get_db)):
@@ -55,6 +56,8 @@ def create_contact(contact: schemas.Contact, person_id: int, db: Session = Depen
         raise HTTPException(status_code=404, detail="Person not found")
     db_contact = crud.create_contact(db, contact, person_id=person_id)
     return db_contact
+
+
 
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):

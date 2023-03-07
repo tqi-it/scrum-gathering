@@ -23,6 +23,9 @@ def create_person(db: Session, person: schemas.Person):
     db.refresh(db_person)
     return (db_person)
 
+def get_contact(db: Session, contact_id: int):
+    return db.query(models.Contact).filter(models.Contact.id == contact_id).first()
+
 def create_contact(db: Session, contact: schemas.Contact, person_id: int):
     db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == "whatsapp").first()
     if db_contact_type == None:
