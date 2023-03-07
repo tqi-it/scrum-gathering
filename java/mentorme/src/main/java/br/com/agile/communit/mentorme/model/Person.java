@@ -1,16 +1,13 @@
 package br.com.agile.communit.mentorme.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -19,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "person")
 public class Person {
-	
+
 	@Id
-    @Column(name = "id", nullable = false)
-	@GeneratedValue( strategy=GenerationType.AUTO )
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="person_sequence")
+	@SequenceGenerator(name="person_sequence", sequenceName="person_sequence", allocationSize = 1)
 	private Integer id;
 
 	@Column(name = "name")
@@ -39,5 +36,5 @@ public class Person {
 
 	@Column(name = "image_url")
 	private String imageUrl;
-    
+
 }

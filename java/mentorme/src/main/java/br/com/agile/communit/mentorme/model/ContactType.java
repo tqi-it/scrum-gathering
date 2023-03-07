@@ -1,14 +1,11 @@
 package br.com.agile.communit.mentorme.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -17,9 +14,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "contact_type")
 public class ContactType {
-	
+
 	@Id
-    @Column(name = "id", nullable = false)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="contact_type_sequence")
+	@SequenceGenerator(name="contact_type_sequence", sequenceName="contact_type_sequence", allocationSize = 1)
 	private Integer id;
 
     @Column(name = "type")

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import br.com.agile.communit.mentorme.model.Person;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.util.CollectionUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -35,7 +36,7 @@ public class PersonResponse {
                 .description(entity.getMiniBio())
                 .name(entity.getName())
                 .wantToLearn(entity.isWantToLearn())
-                .phoneNumber("")
+                //.phoneNumber(CollectionUtils.isEmpty(entity.getContacts()) ? "" : entity.getContacts().get(0).getValue())
                 .build();
     }
 }

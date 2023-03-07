@@ -1,35 +1,26 @@
 package br.com.agile.communit.mentorme.model;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Getter
+@Setter
 @Builder
+@Entity
 @Table(name = "contact_history")
 public class ContactHistory {
 
-	@Id
-    @Column(name = "id", nullable = false)
-	@GeneratedValue( strategy=GenerationType.AUTO )
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="contact_history_sequence")
+    @SequenceGenerator(name="contact_history_sequence", sequenceName="contact_history_sequence", allocationSize = 1)
 	private Integer id;
 	
 	@ManyToOne
@@ -41,7 +32,7 @@ public class ContactHistory {
 	private Person to;
 	
     @Column(name = "created", nullable = false)
-	private Date when;
+	private LocalDateTime when;
     
     @Column(name = "request_type", nullable = false)
     @Enumerated(EnumType.STRING)

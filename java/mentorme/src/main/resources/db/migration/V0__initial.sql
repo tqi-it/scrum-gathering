@@ -5,11 +5,13 @@ CREATE TABLE person (
    can_teach BOOLEAN,
    want_to_learn BOOLEAN
 );
+CREATE SEQUENCE person_sequence START WITH 7 INCREMENT BY 1;
 
 CREATE TABLE contact_type (
    id bigint PRIMARY KEY,
    type VARCHAR (10)
 );
+CREATE SEQUENCE contact_type_sequence START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE contact (
    id bigint PRIMARY KEY,
@@ -19,6 +21,7 @@ CREATE TABLE contact (
    CONSTRAINT fk_contact_person FOREIGN KEY(id_person) REFERENCES person(id),
    CONSTRAINT fk_contact_type FOREIGN KEY(id_contact_type) REFERENCES contact_type(id)
 );
+CREATE SEQUENCE contact_sequence START WITH 7 INCREMENT BY 1;
 
 CREATE TABLE contact_history(
    id bigint PRIMARY KEY,
@@ -31,3 +34,4 @@ CREATE TABLE contact_history(
    CONSTRAINT fk_hist_contact_person_to FOREIGN KEY(id_person_to) REFERENCES person(id),
    CONSTRAINT fk_hist_contact_person_from FOREIGN KEY(id_person_to) REFERENCES person(id)
 );
+CREATE SEQUENCE contact_history_sequence START WITH 2 INCREMENT BY 1;

@@ -28,7 +28,7 @@ public class ContactHistoryController {
 //	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Contato registrado", content = {
 //			@Content(mediaType = "application/json", schema = @Schema(hidden = true)) }) })
 	@PostMapping(value = "/register")
-	public ResponseEntity<ContactHistoryResponse> register(@Valid @NotBlank(message = "Obrigatório") @RequestBody ContactHistoryRequest contactHistoryRequest) {
+	public ResponseEntity<ContactHistoryResponse> register(@RequestBody ContactHistoryRequest contactHistoryRequest) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(contactHistoryService.registerContactHistory(contactHistoryRequest));
 	}
 
