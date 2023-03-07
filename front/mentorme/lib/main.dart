@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mentorme/pages/page_basic_test.dart';
 import 'package:mentorme/pages/page_create_profile_mentor.dart';
 import 'package:mentorme/pages/page_form.dart';
 import 'package:mentorme/pages/page_home.dart';
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => const HomePage(title: 'Mentorme'),
-        // "/": (context) => const FormPage(title: 'Mentorme'),
+         "/": (context) => BasicTestPage(title: 'Mentorme'),
+        // "/": (context) => const HomePage(title: 'Mentorme'),
+        //  "/": (context) => const FormPage(title: 'Mentorme'),
         // "/": (context) => const CreateProfileMentorPage(),
       },
       debugShowCheckedModeBanner: false,

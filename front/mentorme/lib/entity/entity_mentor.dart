@@ -4,13 +4,19 @@ class MentorEntity {
   final String profile;
   final String imageProfile;
   final String availability;
+  final String description;
   final int slots;
   final int likes;
+  final String phoneNumber;
+  final String id;
   final double rate;
 
   MentorEntity(
       {required this.name,
+      required this.phoneNumber,
       required this.skill,
+      required this.id,
+      required this.description,
       required this.profile,
       required this.imageProfile,
       required this.availability,

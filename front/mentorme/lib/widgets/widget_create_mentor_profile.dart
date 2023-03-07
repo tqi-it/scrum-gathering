@@ -9,6 +9,9 @@ class CreateMentorProfileWidget extends StatelessWidget {
   CreateMentorProfileWidget({super.key});
 
   final MentorEntity mentor = MentorEntity(
+      id: "0",
+      description: "",
+      phoneNumber: "",
       name: "Beltrano Gomes Pereira",
       skill: "Agilidade",
       profile: "#",

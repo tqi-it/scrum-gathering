@@ -10,6 +10,9 @@ class MentorSlideWidget extends StatelessWidget {
 
   final MentorEntity mentor = MentorEntity(
       name: "Beltrano Gomes Pereira",
+      id: "0",
+      description: "",
+      phoneNumber: "",
       skill: "Agilidade",
       profile: "#",
       imageProfile:
