@@ -52,13 +52,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r back/app/requirements.txt
       - name: Restore packages
-        working-directory: front/my_app
+        working-directory: front/mentorme
         run: flutter pub get
       - name: Run uvicorn
         run: |
           export PYTHONPATH="back/app"
           nohup uvicorn back.app.main:app --host 0.0.0.0 --port 8000 --reload &
       - name: Flutter test
-        working-directory: front/my_app/test
+        working-directory: front/mentorme/test
         run: |
           flutter test unit_test.dart
