@@ -18,6 +18,7 @@ class Person(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
+    image_url = Column(String, index=True)
     mini_bio = Column(String, index=True)
     can_teach = Column(Boolean, index=True)
     want_to_learn = Column(Boolean, index=True)

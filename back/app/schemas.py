@@ -31,9 +31,10 @@ class Contact(BaseModel):
 class Person(BaseModel):
     id: int
     name: str
+    image_url: str
     mini_bio: str
     can_teach: bool
-    want_to_teach: bool
+    want_to_learn: bool
     contacts: Contact
 
     class Config:

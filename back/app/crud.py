@@ -13,10 +13,11 @@ def get_person(db: Session, person_id: int):
 
 def create_person(db: Session, person: schemas.Person):
     db_person = models.Person(
-        name=person.name, 
+        name=person.name,
+        image_url=person.image_url, 
         mini_bio=person.mini_bio, 
-        can_teach=True, 
-        want_to_learn=False)
+        can_teach=person.can_teach, 
+        want_to_learn=person.want_to_learn)
     db.add(db_person)
     db.commit()
     db.refresh(db_person)
