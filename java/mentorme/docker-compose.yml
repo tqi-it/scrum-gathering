@@ -4,6 +4,8 @@ services:
   postgresql:
     image: postgres
     restart: always
+    container_name: postgresql-local
+    network_mode: bridge
     ports:
       - 5432:5432
     environment:
