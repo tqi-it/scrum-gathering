@@ -44,7 +44,7 @@ RUN mkdir -p /front
 
 COPY ./ front/
 
-WORKDIR /front/my_app
+WORKDIR /front/mentorme
 
 COPY scripts/script.sh /usr/bin
 
