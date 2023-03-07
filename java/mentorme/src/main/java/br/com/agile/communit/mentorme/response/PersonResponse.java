@@ -29,6 +29,7 @@ public class PersonResponse {
 
     public static PersonResponse entityToResponse(Person entity) {
         return PersonResponse.builder()
+                .id(entity.getId())
                 .image(entity.getImageUrl())
                 .canTeach(entity.isCanTeach())
                 .description(entity.getMiniBio())
