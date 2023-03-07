@@ -32,6 +32,13 @@ def get_person(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Person not found")
     return db_person
 
+@app.get("/person/contact/{id}")
+def get_contact(id: int, db: Session = Depends(get_db)):
+    db_contact = crud.get_contact(db, id)
+    if not db_contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
+    return db_contact
+
 
 @app.post("/")
 def create_person(person: schemas.Person, db: Session = Depends(get_db)):
