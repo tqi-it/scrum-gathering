@@ -10,7 +10,7 @@ abrirUrl(String phone, String message) async {
   // if (Platform.isMacOS) {
   //   url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
   // } else {
-    url = "https://api.whatsapp.com/send?phone=$phone";
+  url = "https://api.whatsapp.com/send?phone=$phone";
   // }
   print(url);
 
@@ -45,7 +45,7 @@ class MentorCardWidget extends StatelessWidget {
                     child: Image(
                       width: 103,
                       height: 82,
-                      image: NetworkImage(url),
+                      image: NetworkImage(mentor.imageProfile),
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -96,7 +96,8 @@ class MentorCardWidget extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              abrirUrl(mentor.phoneNumber, "placeholder");
+                              abrirUrl(mentor.phoneNumber,
+                                  "Olá, encontrei seu contato no Mentorme e gostaria de agendar uma mentoria com você. Qual é a sua disponibilidade para falarmos?");
                             },
                             style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder()),
