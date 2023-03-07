@@ -126,7 +126,7 @@ services:
   #   ports:
   #     - "8080:8080"
   #   volumes:
-  #     - ./front/my_app:/home/my_app
+  #     - ./front/mentorme:/home/mentorme
   #   restart: always
   #   depends_on:
   #     - database-dev
