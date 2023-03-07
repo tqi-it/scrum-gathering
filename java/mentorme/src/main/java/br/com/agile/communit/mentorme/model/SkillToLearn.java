@@ -1,7 +1,11 @@
 package br.com.agile.communit.mentorme.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,10 +21,15 @@ import lombok.Setter;
 @Table(name = "SKILL_TO_TEACH")
 public class SkillToLearn {
 
-	@ManyToMany
+	@Id
+    @Column(name = "ID", nullable = false)
+	@GeneratedValue( strategy=GenerationType.AUTO )
+	private Integer id;
+	
+	@ManyToOne
 	private Person person;
 	
-	@ManyToMany
+	@ManyToOne
 	private Skill skill;
 	
 }

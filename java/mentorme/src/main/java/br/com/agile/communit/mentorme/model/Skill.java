@@ -25,11 +25,9 @@ public class Skill {
 	@GeneratedValue( strategy=GenerationType.AUTO )
 	private Integer id;
 	
-	@Id
     @Column(name = "DESCRIPTION")
 	private String description;
 	
-	@Id
     @Column(name = "LABEL")
 	private boolean label;
 

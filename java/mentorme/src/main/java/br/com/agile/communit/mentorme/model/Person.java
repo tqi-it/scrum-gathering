@@ -25,15 +25,12 @@ public class Person {
 	@GeneratedValue( strategy=GenerationType.AUTO )
 	private Integer id;
 	
-	@Id
     @Column(name = "MINI_BIO")
 	private String miniBio;
 	
-	@Id
     @Column(name = "CAN_TEACH")
 	private boolean canTeach;
 	
-	@Id
     @Column(name = "WANT_TO_LEARN")
 	private boolean wantToLearn;
 	
