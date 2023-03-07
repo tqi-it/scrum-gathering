@@ -25,7 +25,7 @@ jobs:
           channel: "stable"
           cache: true
       - name: Test and build apk
-        working-directory: front/my_app
+        working-directory: front/mentorme
         run: |
           flutter pub get
           flutter test test/unit_test.dart
@@ -35,9 +35,9 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: release-apk
-          path: front/my_app/build/app/outputs/apk/release/app-release.apk
+          path: front/mentorme/build/app/outputs/apk/release/app-release.apk
       - uses: actions/upload-artifact@v3
         with:
           name: release-web
-          path: front/my_app/build/web
+          path: front/mentorme/build/web
 
