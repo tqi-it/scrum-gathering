@@ -72,15 +72,17 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-
-      - name: Generate release
-        id: release
-        uses: home-furnishing-nordic/semver-release-manager@master
+   
+      - name: Auto Increment Semver Action
+        uses: MCKanpolat/auto-semver-action@1.0.5
+        id: versioning
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Get the output time
-        run: echo "Execution time ${{ steps.release.outputs.time }}"   
-
+          releaseType: major 
+          incrementPerCommit: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Next Release Number
+        run: echo ${{ steps.versioning.outputs.version }}
 
       - name: Build, tag, and push image to Amazon ECR
         env:
@@ -88,5 +90,5 @@ jobs:
           ECR_REPOSITORY: tqi-ecr
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.release.outputs.time }} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.release.outputs.time }}
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }}
