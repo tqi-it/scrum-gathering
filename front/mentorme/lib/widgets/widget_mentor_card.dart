@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../entity/entity_mentor.dart';
+
+abrirUrl(String phone, String message) async {
+  String url = "";
+
+  // if (Platform.isMacOS) {
+  //   url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
+  // } else {
+    url = "https://api.whatsapp.com/send?phone=$phone";
+  // }
+  print(url);
+
+  if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
+    throw Exception("Error kdjsdksjdks");
+  }
+}
 
 class MentorCardWidget extends StatelessWidget {
   const MentorCardWidget({super.key, required this.mentor});
@@ -78,7 +95,9 @@ class MentorCardWidget extends StatelessWidget {
                         child: SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              abrirUrl(mentor.phoneNumber, "placeholder");
+                            },
                             style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder()),
                             child: const Text(
@@ -130,3 +149,50 @@ class MentorCardWidget extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'dart:io' show Platform;
+// import 'package:url_launcher/url_launcher.dart';
+
+// class OpenWhatsapp extends StatelessWidget {
+//   const OpenWhatsapp({Key? key}) : super(key: key);
+
+  // abrirUrl(String phone, String message) async {
+  //   String url = "";
+
+  //   if (Platform.isAndroid) {
+  //     url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
+  //   } else {
+  //     url = "https://api.whatsapp.com/send?phone=$phone";
+  //   }
+  //   print(url);
+
+  //   if (!await launchUrl(
+  //       Uri.parse(url),
+  //     mode: LaunchMode.externalApplication
+  //   )) {
+  //     throw Exception("Error kdjsdksjdks");
+  //   }
+  // }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Entrada de dados"),
+//       ),
+//       body: Column(
+//         children: <Widget>[
+//           MaterialButton(
+//             child: Text("Open Whats"),
+//             color: Colors.lightGreen,
+//             onPressed: (){
+//               print("Open Whats:" );
+//               abrirUrl("5534991426364", "Olá, gostaria da sua mentoria");
+//             },
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
