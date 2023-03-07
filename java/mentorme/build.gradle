@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'io.swagger.core.v3.swagger-gradle-plugin:io.swagger.core.v3.swagger-gradle-plugin.gradle.plugin:2.2.7'
 
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.4'
 
