@@ -72,6 +72,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+   
+      - name: Auto Increment Semver Action
+        uses: MCKanpolat/auto-semver-action@1.0.5
+        id: versioning
+        with:
+          releaseType: patch 
+          incrementPerCommit: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Next Release Number
+        run: echo ${{ steps.versioning.outputs.version }}
+
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: 641427361254.dkr.ecr.us-east-2.amazonaws.com
