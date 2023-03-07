@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class PersonResponse {
     @JsonProperty("image")
-    private byte[] image;
+    private String image;
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("name")
@@ -28,6 +28,7 @@ public class PersonResponse {
 
     public static PersonResponse entityToResponse(Person entity) {
         return PersonResponse.builder()
+                .image(entity.getImageUrl())
                 .canTeach(entity.isCanTeach())
                 .description(entity.getMiniBio())
                 .name(entity.getName())

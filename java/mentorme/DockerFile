@@ -1,0 +1,43 @@
+FROM openjdk:17-jdk-slim
+
+LABEL maintainer="TQI" \
+      author="Jhonatan Santos"
+
+ENV USER_ID 3000
+
+ENV USER_NAME usertqi
+
+USER root
+
+ENV TZ=America/Sao_Paulo
+
+
+RUN useradd -l -u $USER_ID -ms /bin/bash $USER_NAME && \
+apt-get install -y tzdata && \
+mkdir /application && \
+chown -R $USER_NAME:$USER_NAME /application
+
+COPY . /b
+
+WORKDIR /b/java/mentorme
+
+RUN chown -R usertqi:usertqi /b
+
+USER $USER_NAME
+
+RUN ./gradlew clean build -x test
+
+WORKDIR /application
+
+USER root
+
+RUN mkdir -p /logs && \
+chown -R usertqi:usertqi /opt/ && \
+chown -R usertqi:usertqi /logs && \
+cp -rf /b/java/mentorme/build/libs/*.jar /application/ && \
+rm -rf /b
+
+USER usertqi
+
+
+CMD $JAVA_HOME/bin/java  -jar -Dspring.profiles.active=prod /application/mentorme-0.0.1-SNAPSHOT.jar

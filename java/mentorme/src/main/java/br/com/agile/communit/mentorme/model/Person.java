@@ -41,6 +41,9 @@ public class Person {
 	private boolean canTeach;
 	
     @Column(name = "want_to_learn")
-	private boolean wantToLearn;  
+	private boolean wantToLearn;
+
+	@Column(name = "image_url")
+	private String imageUrl;
     
 }
