@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13.1
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - APP_DB_USER=mentorme
+      - APP_DB_PASS=mentorme
+      - APP_DB_NAME=mentorme
+    volumes:
+      - ./create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+    ports:
+      - 5432:5432
