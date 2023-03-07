@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.agile.communit.mentorme.repository.PersonRepository;
 import br.com.agile.communit.mentorme.response.PersonResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class PersonService {
@@ -20,6 +18,12 @@ public class PersonService {
 
     public List<PersonResponse> listMentor() {
         return personRepository.findByCanTeach(true).orElse(new ArrayList<>())
+                .stream().map(PersonResponse::entityToResponse)
+                .collect(Collectors.toList());
+    }
+    
+    public List<PersonResponse> listMentored() {
+        return personRepository.findByWantToLearn(true).orElse(new ArrayList<>())
                 .stream().map(PersonResponse::entityToResponse)
                 .collect(Collectors.toList());
     }

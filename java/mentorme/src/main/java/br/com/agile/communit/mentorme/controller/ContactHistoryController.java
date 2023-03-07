@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,8 @@ public class ContactHistoryController {
 //	@Operation(summary = "Registra o histórico de contato entre duas pessoas")
 //	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Contato registrado", content = {
 //			@Content(mediaType = "application/json", schema = @Schema(hidden = true)) }) })
-//	@PostMapping(value = "/register")
+	@PostMapping(value = "/register")
 	public ResponseEntity<ContactHistoryResponse> register(@Valid @NotBlank(message = "Obrigatório") @RequestBody ContactHistoryRequest contactHistoryRequest) {
-		;
 		return ResponseEntity.status(HttpStatus.CREATED).body(contactHistoryService.registerContactHistory(contactHistoryRequest));
 	}
 
