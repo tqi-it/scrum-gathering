@@ -82,7 +82,7 @@ def add_interest(skill_id: int, person_id: int, db: Session = Depends(get_db)):
     return db_interest
 
 
-@app.post("/get_skills")
+@app.get("/get_skills")
 def get_skills( person_id: int, db: Session = Depends(get_db)):
     db_person = crud.get_person(db, person_id)
     if not db_person:
@@ -93,7 +93,7 @@ def get_skills( person_id: int, db: Session = Depends(get_db)):
     return db_skills
 
 
-@app.post("/get_interests")
+@app.get("/get_interests")
 def get_interests( person_id: int, db: Session = Depends(get_db)):
     db_person = crud.get_person(db, person_id)
     if not db_person:
