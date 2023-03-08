@@ -96,6 +96,7 @@ jobs:
 
 
   deploy:
+    needs: [run-tests, build-and-publish]
     runs-on: ubuntu-latest
 
     steps:
