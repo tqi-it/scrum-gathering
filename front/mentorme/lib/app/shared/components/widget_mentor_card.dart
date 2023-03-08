@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
+import 'package:mentorme/app/shared/components/mentor_me_button.dart';
+import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-abrirUrl(String phone, String message) async {
-  String url = "";
-
-  // if (Platform.isMacOS) {
-  //   url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
-  // } else {
-  url = "https://api.whatsapp.com/send?phone=$phone";
-  // }
-  print(url);
-
+abrirUrl(String url) async {
   if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
     throw Exception("Error kdjsdksjdks");
   }
@@ -51,8 +43,7 @@ class MentorCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin:
-                        const EdgeInsets.only(left: 12, top: 10, right: 12),
+                        margin: const EdgeInsets.only(left: 12, top: 10, right: 12),
                         child: Text(
                           mentor.name,
                           style: const TextStyle(
@@ -63,8 +54,7 @@ class MentorCardWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 2),
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                         child: SizedBox(
                           width: double.infinity,
                           child: Text(
@@ -90,20 +80,28 @@ class MentorCardWidget extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 12),
                         child: SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
+                          child: MentorMeButton(
+                            label: 'Fale comigo',
                             onPressed: () {
-                              abrirUrl(mentor.phoneNumber,
-                                  "Olá, encontrei seu contato no Mentorme e gostaria de agendar uma mentoria com você. Qual é a sua disponibilidade para falarmos?");
+
+                              List<MentorMeButton> buttons = [];
+
+                              for (var element in mentor.contacts) {
+                                buttons.add(MentorMeButton(label: element.type ?? '', onPressed: (){
+                                  abrirUrl(element.url ?? '');
+                                }));
+                              }
+
+                              MentorMeAlerts.showInfo(
+                                title: 'Agende sua mentoria',
+                                description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
+                                buttons: buttons,
+                              );
+                              /*abrirUrl(
+                                mentor.phoneNumber,
+                                "Olá, encontrei seu contato no Mentorme e gostaria de agendar uma mentoria com você. Qual é a sua disponibilidade para falarmos?",
+                              );*/
                             },
-                            style: ElevatedButton.styleFrom(
-                                shape: const StadiumBorder()),
-                            child: const Text(
-                              "Fale comigo",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
                           ),
                         ),
                       ),
@@ -154,23 +152,23 @@ class MentorCardWidget extends StatelessWidget {
 // class OpenWhatsapp extends StatelessWidget {
 //   const OpenWhatsapp({Key? key}) : super(key: key);
 
-  // abrirUrl(String phone, String message) async {
-  //   String url = "";
+// abrirUrl(String phone, String message) async {
+//   String url = "";
 
-  //   if (Platform.isAndroid) {
-  //     url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
-  //   } else {
-  //     url = "https://api.whatsapp.com/send?phone=$phone";
-  //   }
-  //   print(url);
+//   if (Platform.isAndroid) {
+//     url = "whatsapp://wa.me/$phone/?text=${Uri.encodeFull(message)}";
+//   } else {
+//     url = "https://api.whatsapp.com/send?phone=$phone";
+//   }
+//   print(url);
 
-  //   if (!await launchUrl(
-  //       Uri.parse(url),
-  //     mode: LaunchMode.externalApplication
-  //   )) {
-  //     throw Exception("Error kdjsdksjdks");
-  //   }
-  // }
+//   if (!await launchUrl(
+//       Uri.parse(url),
+//     mode: LaunchMode.externalApplication
+//   )) {
+//     throw Exception("Error kdjsdksjdks");
+//   }
+// }
 
 //   @override
 //   Widget build(BuildContext context) {

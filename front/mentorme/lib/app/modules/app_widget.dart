@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mentorme/app/shared/services/navigator/navigation_service.dart';
 
 class AppWidget extends StatefulWidget {
@@ -31,7 +32,11 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver{
 
     return MaterialApp.router(
       title: 'MentorME',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        fontFamily: GoogleFonts.roboto().fontFamily,
+        // colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFD9385E)),
+      ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
     );

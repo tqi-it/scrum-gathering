@@ -20,7 +20,7 @@ class MentorSlideWidget extends StatelessWidget {
       availability: "Manhã, tarde e noite",
       slots: 1,
       likes: 999,
-      rate: 4.9);
+      rate: 4.9, contacts: []);
 
   @override
   Widget build(BuildContext context) {

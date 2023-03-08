@@ -23,7 +23,7 @@ Future<List<MentorEntity>> fetchMentor() async {
           description: data["description"],
           slots: 0,
           likes: 0,
-          rate: 0),
+          rate: 0, contacts: []),
     );
   }
   print("Passou");
@@ -86,7 +86,7 @@ class _BasicTestPageState extends State<BasicTestPage> {
                       description: snapshot.data![i].description,
                       slots: 0,
                       likes: 0,
-                      rate: 0),
+                      rate: 0, contacts: []),
                 ),
               );
             } else {

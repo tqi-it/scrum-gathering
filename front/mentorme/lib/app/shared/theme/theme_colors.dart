@@ -9,6 +9,8 @@ class ThemeColors {
   static const Color primary200 = Color(0xFFF5C0B8);
   static const Color primary100 = Color(0xFFFCECEA);
 
+  static const Color backgroundColour = Color(0xFFEBF0FF);
+
   static const Color sucecess700 = Color(0xFF2F6846);
   static const Color sucecess600 = Color(0xFF328048);
   static const Color sucecess500 = Color(0xFF5CB176);
