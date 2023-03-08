@@ -90,8 +90,8 @@ jobs:
           ECR_REPOSITORY: tqi-ecr
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.1 .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.1
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.2 .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.2
 
 
 
@@ -111,7 +111,7 @@ jobs:
       - name: Replace version
         run: |
           cd scrum-gathering-manifests
-          rm manifests/deployment.yaml && sed 's@TAG_REPLACE@'"2.0.1"'@' templates/deployment.tmp > manifests/deployment.yaml
+          rm manifests/deployment.yaml && sed 's@TAG_REPLACE@'"2.0.2"'@' templates/deployment.tmp > manifests/deployment.yaml
           cat manifests/deployment.yaml | grep image
           git config --global user.email "viniciusgomes955@gmail.com"
           git config --global user.name "apolzek"
