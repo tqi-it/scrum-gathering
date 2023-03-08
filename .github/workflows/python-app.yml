@@ -93,9 +93,11 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }} .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }}
 
-      - name: Clone GuillaumeFalourd/formulas-training PRIVATE repository
-        uses: GuillaumeFalourd/clone-github-repo-action@v2
+      - name: Setup SSH
+        uses: MrSquaare/ssh-setup-action@v1
         with:
-          owner: 'tqi-it'
-          repository: 'scrum-gathering-manifests'
-          access-token: ${{ secrets.ACCESS_TOKEN }}
+            host: github.com
+            private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            
+      - name: Clone repository
+        run: git clone git@github.com:tqi-it/scrum-gathering-manifests.git
