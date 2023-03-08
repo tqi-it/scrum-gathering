@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -10,9 +10,12 @@ from database import SessionLocal, engine
 from controller.request.request import ContactRequest
 from controller.response.response import PersonResponse, ContactResponse
 
+from controller.person import person_router
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+router = APIRouter()
 
 app.add_middleware(
     CORSMiddleware,
@@ -30,21 +33,8 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/person/{id}")
-def get_person(id: int, db: Session = Depends(get_db)):
-    db_person = crud.get_person(db, id)
-    if not db_person:
-        raise HTTPException(status_code=404, detail="Person not found")
-    return db_person
 
-
-@app.post("/person")
-def create_person(person: schemas.Person, db: Session = Depends(get_db)):
-    db_person = crud.get_person(db, person.id)
-    if db_person:
-        raise HTTPException(status_code=400, detail="Person already exists")
-    db_person = crud.create_person(db, person)
-    return db_person
+app.include_router(person_router)
 
 
 @app.get("/contact/{id}")
