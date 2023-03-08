@@ -2,11 +2,11 @@ name: CICD Python application
 
 on:
   push:
-    branches: [ "devs" ]
+    branches: [ "deve" ]
     paths:
       -  'back/**'
   pull_request:
-    branches: [ "devs" ]
+    branches: [ "deve" ]
     paths:
     -  'back/**'
 
