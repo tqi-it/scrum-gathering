@@ -1,0 +1,51 @@
+name: mentorme
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.1 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+  intl: ^0.18.0
+  url_launcher: ^6.1.10
+  dio: ^4.0.6
+
+
+  cupertino_icons: ^1.0.2
+  faker: ^2.1.0
+  google_fonts: ^4.0.3
+  carousel_slider: ^4.2.1
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  test: ^1.22.0
+  dio_logger: ^4.0.8+8
+  firebase_core: ^2.3.0
+  firebase_analytics: ^10.0.6
+  firebase_crashlytics: ^3.0.6
+  rx_notifier: ^1.1.0
+  flutter_modular: ^5.0.1
+  flutter_secure_storage: ^4.2.1
+  flutter_svg: ^1.1.6
+  dartz: ^0.10.1
+
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - resources/images/
+    - resources/icon/
+    - resources/animations/
+    - resources/languages/

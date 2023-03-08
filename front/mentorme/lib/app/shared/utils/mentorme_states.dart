@@ -1,0 +1,1 @@
+enum MentorMeStates { start, loading, success, error }
