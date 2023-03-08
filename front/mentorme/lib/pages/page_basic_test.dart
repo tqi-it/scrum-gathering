@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mentorme/widgets/widget_mentor_card.dart';
+import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
+import 'package:mentorme/app/shared/components/widget_mentor_card.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../entity/entity_mentor.dart';
 
 Future<List<MentorEntity>> fetchMentor() async {
   final response = await http.get(

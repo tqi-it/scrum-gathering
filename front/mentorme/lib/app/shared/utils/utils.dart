@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
 
-import '../entity/entity_event.dart';
+import 'package:mentorme/entity/entity_event.dart';
 
 void alertPopup(BuildContext context, String message) {
   showDialog(

@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
-
-import '../utils/utils.dart';
+import 'package:mentorme/app/shared/utils/utils.dart';
 
 class CreateEventPage extends StatefulWidget {
   CreateEventPage({super.key});

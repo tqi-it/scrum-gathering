@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/entity/entity_event.dart';
-import 'package:mentorme/widgets/widget_event_date.dart';
+import 'package:mentorme/app/shared/components/widget_event_date.dart';
+import 'package:mentorme/app//shared/utils/utils.dart';
 import 'package:http/http.dart' as http;
-
-import '../utils/utils.dart';
 
 typedef void VoidCallback(String message);
 

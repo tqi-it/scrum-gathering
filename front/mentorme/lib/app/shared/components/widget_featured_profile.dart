@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../entity/entity_mentor.dart';
+import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
 
 class FeaturedProfileWidget extends StatelessWidget {
   const FeaturedProfileWidget({

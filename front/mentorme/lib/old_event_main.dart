@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:mentorme/entity/entity_event.dart';
 import 'package:mentorme/pages/page_create_event.dart';
-import 'package:mentorme/widgets/widget_event.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mentorme/app/shared/components/widget_event.dart';
 
 Future<List<EventEntity>> fetchEvent() async {
   final response = await http.get(Uri.parse('http://localhost:8000/events'));

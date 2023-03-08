@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mentorme/widgets/widget_featured_profile.dart';
-import 'package:mentorme/widgets/widget_mentor_card.dart';
+import 'package:mentorme/app//shared/components/widget_featured_profile.dart';
+import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
+import 'package:mentorme/app/shared/components/widget_mentor_card.dart';
 
-import '../entity/entity_mentor.dart';
 
 class MentorSlideWidget extends StatelessWidget {
   MentorSlideWidget({super.key});

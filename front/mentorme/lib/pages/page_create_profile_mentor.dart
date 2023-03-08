@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/pages/page_base.dart';
-
-import '../widgets/widget_appbar_home.dart';
-import '../widgets/widget_bottom_navigation_bar_form.dart';
-import '../widgets/widget_create_mentor_profile.dart';
+import 'package:mentorme/app/shared/components/widget_appbar_home.dart';
+import 'package:mentorme/app/shared/components/widget_bottom_navigation_bar_form.dart';
+import 'package:mentorme/app/shared/components/widget_create_mentor_profile.dart';
 
 class CreateProfileMentorPage extends StatelessWidget {
   const CreateProfileMentorPage({super.key});

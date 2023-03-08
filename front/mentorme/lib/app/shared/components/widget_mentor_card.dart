@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
+import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../entity/entity_mentor.dart';
 
 abrirUrl(String phone, String message) async {
   String url = "";
@@ -33,21 +32,18 @@ class MentorCardWidget extends StatelessWidget {
       color: Colors.white,
       child: Container(
         padding: const EdgeInsets.all(8),
-        width: 300,
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image(
-                      width: 103,
-                      height: 82,
-                      image: NetworkImage(mentor.imageProfile),
-                      fit: BoxFit.fitWidth,
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image(
+                    width: 103,
+                    height: 82,
+                    image: NetworkImage(mentor.imageProfile),
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
                 Expanded(
@@ -56,7 +52,7 @@ class MentorCardWidget extends StatelessWidget {
                     children: [
                       Container(
                         margin:
-                            const EdgeInsets.only(left: 12, top: 10, right: 12),
+                        const EdgeInsets.only(left: 12, top: 10, right: 12),
                         child: Text(
                           mentor.name,
                           style: const TextStyle(
