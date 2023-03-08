@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
 import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/mentorme_alert.dart';
+import 'package:mentorme/app/shared/theme/images.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abrirUrl(String url) async {
@@ -83,18 +84,24 @@ class MentorCardWidget extends StatelessWidget {
                           child: MentorMeButton(
                             label: 'Fale comigo',
                             onPressed: () {
-
                               List<MentorMeButton> buttons = [];
 
                               for (var element in mentor.contacts) {
-                                buttons.add(MentorMeButton(label: element.type ?? '', onPressed: (){
-                                  abrirUrl(element.url ?? '');
-                                }));
+                                buttons.add(
+                                  MentorMeButton(
+                                    label: element.type ?? '',
+                                    icon: element.type!.contains('Whatsapp') ? ThemeImages.whatsapp : ThemeImages.linkedin,
+                                    onPressed: () {
+                                      abrirUrl(element.url ?? '');
+                                    },
+                                  ),
+                                );
                               }
 
                               MentorMeAlerts.showInfo(
                                 title: 'Agende sua mentoria',
-                                description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
+                                description:
+                                    'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
                                 buttons: buttons,
                               );
                               /*abrirUrl(
