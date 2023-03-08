@@ -98,10 +98,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: "./back"
-
     steps:
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
