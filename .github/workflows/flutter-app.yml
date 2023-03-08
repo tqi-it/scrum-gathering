@@ -2,11 +2,11 @@ name: Flutter application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "devs" ]
     paths:
       -  'front/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "devs" ]
     paths:
     -  'front/**'
 
