@@ -2,9 +2,9 @@ name: Build apk
 
 on:
   push:
-    branches: ["main"]
+    branches: ["devs"]
   pull_request:
-    branches: ["main"]
+    branches: ["devs"]
 
 permissions:
   contents: write
