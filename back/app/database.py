@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
 if SERVER := os.getenv('DEV_CONTAINERS'):
-    SERVER = "database-dev"
+    SERVER = "postgres"
 else:
     SERVER = "localhost"
 

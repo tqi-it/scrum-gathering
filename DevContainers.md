@@ -80,7 +80,7 @@ Folder structure example
 	"name": "Back",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "database-dev",
+	"service": "postgres",
 	"workspaceFolder": "/"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -109,9 +109,9 @@ Folder structure example
 ```yml
 version: "3"
 services:
-  database-dev:
+  postgres:
     image: postgres:14-alpine
-    container_name: database-dev
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
@@ -129,7 +129,7 @@ services:
   #     - ./front/my_app:/home/my_app
   #   restart: always
   #   depends_on:
-  #     - database-dev
+  #     - postgres
   # back-dev:
   #   image: back-dev
   #   build:
@@ -141,7 +141,7 @@ services:
   #     - ./back:/back
   #   restart: always
   #   depends_on:
-  #     - database-dev
+  #     - postgres
 ```
 
 ###### Dockerfile
