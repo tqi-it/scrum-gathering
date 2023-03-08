@@ -25,6 +25,10 @@ def get_db():
     finally:
         db.close()
 
+@app.get("/health")
+def health():
+    return "ok"
+
 @app.get("/event/{id}")
 def get_event(id: int, db: Session = Depends(get_db)):
     db_event = crud.get_event(db, id)
