@@ -1,13 +1,14 @@
-from fastapi import FastAPI, Depends, HTTPException
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from controller.request.request import ContactRequest
 
 import crud
 import models
 import schemas
 from database import SessionLocal, engine
+
+from controller.request.request import ContactRequest
+from controller.response.response import PersonResponse, ContactResponse
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -125,9 +126,20 @@ def get_mentors(db: Session = Depends(get_db)):
     db_person = crud.get_mentors(db)
     if not db_person:
         raise HTTPException(status_code=404, detail="No mentors could be found")
-    return db_person
-
-
+    mentors = []
+    for person in db_person:
+        db_contacts = crud.get_person_contacts(db, person.id)
+        contacts = []
+        if db_contacts:
+            for contact in db_contacts:
+                print('contact', contact.id, contact.type.type, contact.value)
+                contacts.append(ContactResponse(id=contact.id, type=contact.type.type, value=contact.value))
+        print('person.id', person.id)
+        person_response = PersonResponse(id=person.id, name=person.name, image=person.image_url, description=person.mini_bio, contacts=contacts)
+        print('person_response', person_response)
+        mentors.append(person_response)
+        print('mentors', mentors)
+    return mentors
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):
 #     db_event = crud.get_event(db, id)
