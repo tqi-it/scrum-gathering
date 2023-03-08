@@ -1,11 +1,9 @@
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, Response, status
+
 from controller.request.request import ContactRequest
 
 import models
 import schemas
-
-from datetime import datetime
 
 
 def get_person(db: Session, person_id: int):
@@ -22,11 +20,16 @@ def create_person(db: Session, person: schemas.Person):
     db.add(db_person)
     db.commit()
     db.refresh(db_person)
-    return (db_person)
+    return db_person
 
 
 def get_contact(db: Session, contact_id: int):
     return db.query(models.Contact).filter(models.Contact.id == contact_id).first()
+
+
+def get_person_contacts(db: Session, person_id: int):
+    return list(db.query(models.Contact).filter(models.Contact.person_id == person_id))
+
 
 def create_contact(db: Session, contact_request: ContactRequest):
     db_contact_type = db.query(models.ContactType).filter(
@@ -92,7 +95,7 @@ def update_contact(db: Session, contact: schemas.Contact):
 
 
 def get_mentors(db: Session):
-    return list(db.query(models.Person).filter(models.Person.can_teach == 'true'))
+    return list(db.query(models.Person).filter(models.Person.can_teach == True))
 
 
 
