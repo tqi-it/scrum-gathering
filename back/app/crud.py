@@ -23,12 +23,14 @@ def create_person(db: Session, person: schemas.Person):
     db.refresh(db_person)
     return (db_person)
 
+
 def get_contact(db: Session, contact_id: int):
     return db.query(models.Contact).filter(models.Contact.id == contact_id).first()
 
+
 def create_contact(db: Session, contact: schemas.Contact, person_id: int):
     db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == "whatsapp").first()
-    if db_contact_type == None:
+    if db_contact_type is None:
         db_contact_type = models.ContactType(type="whatsapp")
         db_contact = models.Contact(contact_type_id=db_contact_type.id,
             type=db_contact_type, value="11999999999", person_id=person_id)
@@ -39,6 +41,34 @@ def create_contact(db: Session, contact: schemas.Contact, person_id: int):
     db.commit()
     db.refresh(db_contact)
     return db_contact
+
+
+def get_skill(db: Session, skill_id: int):
+    return db.query(models.Skill).filter(models.Skill.id == skill_id).first()
+
+
+def get_skills_want_to_learn(db: Session, id_person: int):
+    return list(db.query(models.SkillToLearn).filter(models.SkillToLearn.id_person == id_person))
+
+
+def get_skills_can_teach(db: Session, id_person: int):
+    return list(db.query(models.SkillToTeach).filter(models.SkillToLearn.id_person == id_person))
+
+
+def add_skills(db: Session, id_skill: int, id_person: int):
+    skill_to_teach = models.SkillToTeach(id_person=id_person, id_skill=id_skill)
+    db.add(skill_to_teach)
+    db.commit()
+    db.refresh(skill_to_teach)
+    return skill_to_teach
+
+
+def add_interest(db: Session, id_skill: int, id_person: int):
+    skill_to_learn = models.SkillToLearn(id_person=id_person, id_skill=id_skill)
+    db.add(skill_to_learn)
+    db.commit()
+    db.refresh(skill_to_learn)
+    return skill_to_learn
 
 
 # def get_event(db: Session, event_id: int):

@@ -58,6 +58,52 @@ def create_contact(contact: schemas.Contact, person_id: int, db: Session = Depen
     return db_contact
 
 
+@app.post("/add_skill")
+def add_skill(skill_id: int, person_id: int, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, person_id)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="Person not found")
+    db_skill = crud.get_skill(db, skill_id)
+    if not db_skill:
+        raise HTTPException(status_code=404, detail="Skill not found")
+    db_skills = crud.add_skills(db, skill_id, person_id)
+    return db_skills
+
+
+@app.post("/add_interest")
+def add_interest(skill_id: int, person_id: int, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, person_id)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="Person not found")
+    db_skill = crud.get_skill(db, skill_id)
+    if not db_skill:
+        raise HTTPException(status_code=404, detail="Skill of interest not found")
+    db_interest = crud.add_interest(db, skill_id, person_id)
+    return db_interest
+
+
+@app.post("/get_skills")
+def get_skills( person_id: int, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, person_id)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="Person not found")
+    db_skills = crud.get_skills_can_teach(db, person_id)
+    if not db_skills:
+        raise HTTPException(status_code=404, detail="Person has no skills to teach")
+    return db_skills
+
+
+@app.post("/get_interests")
+def get_interests( person_id: int, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, person_id)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="Person not found")
+    db_interests = crud.get_skills_want_to_learn(db, person_id)
+    if not db_interests:
+        raise HTTPException(status_code=404, detail="Person has no interests")
+    return db_interests
+
+
 
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):

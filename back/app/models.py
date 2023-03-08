@@ -44,3 +44,27 @@ class ContactType(Base):
     id = Column(Integer, primary_key=True, index=True)
     type = Column(String, index=True)
     type_item = relationship("Contact", back_populates="type")
+
+
+class Skill(Base):
+    __tablename__ = "skill"
+
+    id = Column(Integer, primary_key=True, index=True)
+    label = Column(String, index=True)
+    description = Column(String, index=True)
+
+
+class SkillToLearn(Base):
+    __tablename__ = "skill_to_learn"
+
+    id = Column(Integer, primary_key=True, index=True)
+    id_person = Column(Integer, ForeignKey("person.id"))
+    id_skill = Column(Integer, ForeignKey("skill.id"))
+
+
+class SkillToTeach(Base):
+    __tablename__ = "skill_to_teach"
+
+    id = Column(Integer, primary_key=True, index=True)
+    id_person = Column(Integer, ForeignKey("person.id"))
+    id_skill = Column(Integer, ForeignKey("skill.id"))

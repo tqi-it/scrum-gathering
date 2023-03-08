@@ -39,3 +39,21 @@ class Person(BaseModel):
 
     class Config:
          orm_mode = True
+
+
+class Skill(BaseModel):
+    id: int
+    name: str
+    description: str
+
+
+class SkillToLearn(BaseModel):
+    id = int
+    id_person = int
+    id_skill = int
+
+
+class SkillToTeach(BaseModel):
+    id = int
+    id_person = int
+    id_skill = int
