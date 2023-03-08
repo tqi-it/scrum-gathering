@@ -90,8 +90,8 @@ jobs:
           ECR_REPOSITORY: tqi-ecr
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }}
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.0 .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.0
 
 
 
