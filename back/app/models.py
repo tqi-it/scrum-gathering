@@ -68,3 +68,18 @@ class SkillToTeach(Base):
     id = Column(Integer, primary_key=True, index=True)
     id_person = Column(Integer, ForeignKey("person.id"))
     id_skill = Column(Integer, ForeignKey("skill.id"))
+
+
+class ContactHistory(Base):
+    __tablename__ = "contact_history"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    person_id_to = Column(Integer, ForeignKey("person.id"))
+    personTo = relationship("Person", back_populates="contacts_history_to")
+    person_id_end = Column(Integer, ForeignKey("person.id"))
+    personFrom = relationship("Person", back_populates="contacts_history_from")
+    contact_type = Column(String)
+    contact_value = Column(String)
+    request_type = Column(String)
+    when = Column(DateTime)
