@@ -75,10 +75,10 @@ class ContactHistory(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    person_id_to = Column(Integer, ForeignKey("person.id"))
-    personTo = relationship("Person", back_populates="contacts_history_to")
-    person_id_end = Column(Integer, ForeignKey("person.id"))
-    personFrom = relationship("Person", back_populates="contacts_history_from")
+    person_id_to = Column(Integer, ForeignKey("person.id"), nullable=False)
+    personTo = relationship("Person", foreign_keys=[person_id_to])
+    person_id_end = Column(Integer, ForeignKey("person.id"), nullable=False)
+    personFrom = relationship("Person", foreign_keys=[person_id_end])
     contact_type = Column(String)
     contact_value = Column(String)
     request_type = Column(String)
