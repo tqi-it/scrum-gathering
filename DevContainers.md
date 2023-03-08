@@ -117,7 +117,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: database
+      POSTGRES_DB: postgres
   # front-dev:
   #   image: front-dev
   #   build:

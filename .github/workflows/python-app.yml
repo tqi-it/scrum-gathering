@@ -25,7 +25,7 @@ jobs:
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: root
-          POSTGRES_DB: database
+          POSTGRES_DB: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -90,8 +90,8 @@ jobs:
           ECR_REPOSITORY: tqi-ecr
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.5 .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.5
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.7 .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.7
 
 
 
@@ -112,7 +112,7 @@ jobs:
       - name: Replace version
         run: |
           cd scrum-gathering-manifests
-          rm manifests/deployment.yaml && sed 's@TAG_REPLACE@'"2.0.5"'@' templates/deployment.tmp > manifests/deployment.yaml
+          rm manifests/deployment.yaml && sed 's@TAG_REPLACE@'"2.0.7"'@' templates/deployment.tmp > manifests/deployment.yaml
           cat manifests/deployment.yaml | grep image
           git config --global user.email "viniciusgomes955@gmail.com"
           git config --global user.name "apolzek"
