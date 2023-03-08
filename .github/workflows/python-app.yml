@@ -93,6 +93,16 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }} .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.versioning.outputs.version }}
 
+
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: "./back"
+
+    steps:
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
@@ -101,3 +111,14 @@ jobs:
             
       - name: Clone repository
         run: git clone git@github.com:tqi-it/scrum-gathering-manifests.git
+      
+      - name: Replace version
+        run: |
+          cd scrum-gathering-manifests
+          rm manifests/deployment.yaml && sed 's@TAG_REPLACE@'"2.2"'@' templates/deployment.tmp > manifests/deployment.yaml
+          cat manifests/deployment.yaml | grep image
+          git config --global user.email "viniciusgomes955@gmail.com"
+          git config --global user.name "apolzek"
+          git add .
+          git commit -m "Update version $CI_PIPELINE_IID"
+          git push
