@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, Response, status
+from controller.request.request import ContactRequest
 
 import models
 import schemas
@@ -14,9 +15,9 @@ def get_person(db: Session, person_id: int):
 def create_person(db: Session, person: schemas.Person):
     db_person = models.Person(
         name=person.name,
-        image_url=person.image_url, 
-        mini_bio=person.mini_bio, 
-        can_teach=person.can_teach, 
+        image_url=person.image_url,
+        mini_bio=person.mini_bio,
+        can_teach=person.can_teach,
         want_to_learn=person.want_to_learn)
     db.add(db_person)
     db.commit()
@@ -27,21 +28,17 @@ def create_person(db: Session, person: schemas.Person):
 def get_contact(db: Session, contact_id: int):
     return db.query(models.Contact).filter(models.Contact.id == contact_id).first()
 
-
-def create_contact(db: Session, contact: schemas.Contact, person_id: int):
-    db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == "whatsapp").first()
-    if db_contact_type is None:
-        db_contact_type = models.ContactType(type="whatsapp")
-        db_contact = models.Contact(contact_type_id=db_contact_type.id,
-            type=db_contact_type, value="11999999999", person_id=person_id)
-    else:
-        db_contact = models.Contact(contact_type_id=db_contact_type.id,
-            type=db_contact_type, value="11999999999", person_id=person_id)
+def create_contact(db: Session, contact_request: ContactRequest):
+    db_contact_type = db.query(models.ContactType).filter(
+        models.ContactType.type == contact_request.type
+    ).first()
+    db_person = db.query(models.Person).filter(models.Person.id == contact_request.person_id).first()
+    db_contact = models.Contact(contact_type_id=db_contact_type.id,
+                            type=db_contact_type, value=contact_request.url, person_id=db_person.id)
     db.add(db_contact)
     db.commit()
     db.refresh(db_contact)
     return db_contact
-
 
 def get_skill(db: Session, skill_id: int):
     return db.query(models.Skill).filter(models.Skill.id == skill_id).first()
@@ -69,6 +66,29 @@ def add_interest(db: Session, id_skill: int, id_person: int):
     db.commit()
     db.refresh(skill_to_learn)
     return skill_to_learn
+
+def update_contact(db: Session, contact: schemas.Contact):
+    db_query = db.query(models.Contact).filter(models.Contact.id == contact.id)
+    print(contact)
+    db_contact = get_contact(db, contact.id)
+    db_contact.type = db.query(models.ContactType).filter(models.ContactType.type == contact.type.type)
+    db_contact.contact_type_id = db_contact.type.id
+    db_contact.value = contact.value
+    # contact_dict = {
+    #     "id": contact.id,
+    #     "contact_type_id": contact.contact_type_id,
+    #     "type": {
+    #         "id": contact.type.id,
+    #         "type": contact.type.type
+    #     },
+    #     "value": contact.value,
+    #     "person_id": contact.person_id
+    # }
+    db_query.update(db_contact)
+    db_contact = db_query.first()
+    db.commit()
+    db.refresh(db_contact)
+    return db_contact
 
 
 def get_mentors(db: Session):

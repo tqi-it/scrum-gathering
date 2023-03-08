@@ -2,8 +2,11 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from controller.request.request import ContactRequest
 
-import crud, models, schemas
+import crud
+import models
+import schemas
 from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -18,12 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
 
 @app.get("/person/{id}")
 def get_person(id: int, db: Session = Depends(get_db)):
@@ -42,19 +47,31 @@ def create_person(person: schemas.Person, db: Session = Depends(get_db)):
     return db_person
 
 
-@app.get("/person/contact/{id}")
+@app.get("/contact/{id}")
 def get_contact(id: int, db: Session = Depends(get_db)):
     db_contact = crud.get_contact(db, id)
     if not db_contact:
         raise HTTPException(status_code=404, detail="Contact not found")
     return db_contact
 
+
 @app.post("/contact")
-def create_contact(contact: schemas.Contact, person_id: int, db: Session = Depends(get_db)):
-    db_person = crud.get_person(db, person_id)
+def create_contact(contact: ContactRequest, db: Session = Depends(get_db)):
+    db_person = crud.get_person(db, contact.person_id)
     if not db_person:
         raise HTTPException(status_code=404, detail="Person not found")
-    db_contact = crud.create_contact(db, contact, person_id=person_id)
+    db_contact = crud.create_contact(db, contact)
+    return db_contact
+
+
+@app.patch("/contact")
+def update_contact(contact: schemas.Contact, db: Session = Depends(get_db)):
+    db_contact = crud.get_contact(db, contact.id)
+    if not db_contact:
+        raise HTTPException(status_code=404, detail="Contact not found")
+    if contact.person_id != db_contact.person_id:
+        raise HTTPException(status_code=403, detail="Access forbidden")
+    db_contact = crud.update_contact(db, contact)
     return db_contact
 
 
