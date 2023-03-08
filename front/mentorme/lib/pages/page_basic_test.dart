@@ -8,7 +8,7 @@ import '../entity/entity_mentor.dart';
 Future<List<MentorEntity>> fetchMentor() async {
   final response = await http.get(
       Uri.parse('https://private-97460f-mentorme.apiary-mock.com/mentors'));
-  final json = jsonDecode(response.body);
+  final json = jsonDecode(utf8.decode(response.bodyBytes));
   final List<MentorEntity> list = [];
   print(json);
   for (var data in json) {
