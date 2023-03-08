@@ -57,3 +57,17 @@ class SkillToTeach(BaseModel):
     id = int
     id_person = int
     id_skill = int
+
+
+class ContactHistory(BaseModel):
+    id: int
+    person_to: Person
+    person_from: Person
+    contact_type: str
+    contact_value: str
+    when: datetime
+    request_type: str
+
+    class Config:
+         orm_mode = True
+
