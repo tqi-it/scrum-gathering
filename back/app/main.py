@@ -29,7 +29,6 @@ def get_db():
     finally:
         db.close()
 
-
 @app.get("/person/{id}")
 def get_person(id: int, db: Session = Depends(get_db)):
     db_person = crud.get_person(db, id)
@@ -158,3 +157,8 @@ def get_mentors(db: Session = Depends(get_db)):
 # @app.delete("/event/{id}")
 # def delete_event(id: int, db: Session = Depends(get_db)):
 #     return crud.delete_event(db, id)
+
+@app.get("/health")
+def health():
+    return "ok"
+

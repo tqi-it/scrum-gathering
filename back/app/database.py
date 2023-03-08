@@ -3,11 +3,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
 if SERVER := os.getenv('DEV_CONTAINERS'):
-    SERVER = "database-dev"
+    SERVER = "postgres"
 else:
     SERVER = "localhost"
 
-SQLACLHEMY_DATABASE_URL = f"postgresql://user:pass@{SERVER}/database"
+SQLACLHEMY_DATABASE_URL = f"postgresql://root:root@{SERVER}/postgres"
 
 engine = create_engine(SQLACLHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="br/com/agile/communit/mentorme/model/" kind="src" path="java/mentorme/src/main/java"/>
+	<classpathentry kind="src" path="java/mentorme/src/test/java"/>
+	<classpathentry kind="lib" path="java/mentorme/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -2,9 +2,13 @@ name: Flutter application
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+    paths:
+      -  'front/**'
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
+    paths:
+    -  'front/**'
 
 permissions:
   contents: read
@@ -22,9 +26,9 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: pass
-          POSTGRES_DB: database
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+          POSTGRES_DB: postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -48,13 +52,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r back/app/requirements.txt
       - name: Restore packages
-        working-directory: front/my_app
+        working-directory: front/mentorme
         run: flutter pub get
       - name: Run uvicorn
         run: |
           export PYTHONPATH="back/app"
           nohup uvicorn back.app.main:app --host 0.0.0.0 --port 8000 --reload &
       - name: Flutter test
-        working-directory: front/my_app/test
+        working-directory: front/mentorme/test
         run: |
           flutter test unit_test.dart
