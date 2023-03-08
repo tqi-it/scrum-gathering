@@ -83,3 +83,4 @@ class ContactHistory(Base):
     contact_value = Column(String)
     request_type = Column(String)
     when = Column(DateTime)
+

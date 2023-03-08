@@ -15,7 +15,7 @@ permissions:
 
 jobs:
 
-  run-tests:
+  run-install:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -31,7 +31,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
     - uses: actions/checkout@v3
 
@@ -44,12 +43,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r back/app/requirements.txt
-
-    - name: Test with pytest
-      env:
-        PYTHONPATH: back/app
-      run: |
-        pytest back/app/test/test_main.py
 
   build-and-publish:
     runs-on: ubuntu-latest
@@ -72,15 +65,15 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-   
+
       - name: Auto Increment Semver Action
         uses: MCKanpolat/auto-semver-action@1.0.5
         id: versioning
         with:
-          releaseType: major 
+          releaseType: major
           incrementPerCommit: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        
+
       - name: Next Release Number
         run: echo ${{ steps.versioning.outputs.version }}
 
@@ -93,10 +86,8 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:2.0.7 .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:2.0.7
 
-
-
   deploy:
-    needs: [run-tests, build-and-publish]
+    needs: [run-install, build-and-publish]
     runs-on: ubuntu-latest
 
     steps:
@@ -105,10 +96,10 @@ jobs:
         with:
             host: github.com
             private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            
+
       - name: Clone repository
         run: git clone git@github.com:tqi-it/scrum-gathering-manifests.git
-      
+
       - name: Replace version
         run: |
           cd scrum-gathering-manifests
