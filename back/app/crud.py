@@ -71,6 +71,11 @@ def add_interest(db: Session, id_skill: int, id_person: int):
     return skill_to_learn
 
 
+def get_mentors(db: Session):
+    return list(db.query(models.Person).filter(models.Person.can_teach == 'true'))
+
+
+
 # def get_event(db: Session, event_id: int):
 #     return db.query(models.Event).filter(models.Event.id == event_id).first()
 

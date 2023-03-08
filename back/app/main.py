@@ -104,6 +104,13 @@ def get_interests( person_id: int, db: Session = Depends(get_db)):
     return db_interests
 
 
+@app.get("/mentors")
+def get_mentors(db: Session = Depends(get_db)):
+    db_person = crud.get_mentors(db)
+    if not db_person:
+        raise HTTPException(status_code=404, detail="No mentors could be found")
+    return db_person
+
 
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):
