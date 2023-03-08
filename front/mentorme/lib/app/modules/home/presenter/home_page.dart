@@ -59,19 +59,17 @@ class _HomePageState extends State<HomePage> {
                         ))
                             .toList(),
                       ),
-                      child: Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: (MediaQuery.of(context).size.height/2)-60,),
-                            MentorMeSpinRing(
-                              color: Colors.pink,
-                              lineWidth: 3,
-                              size: 50,
-                            ),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(height: (MediaQuery.of(context).size.height/2)-60,),
+                          MentorMeSpinRing(
+                            color: Colors.pink,
+                            lineWidth: 3,
+                            size: 50,
+                          ),
+                        ],
                       ),
                     ),
                   ),

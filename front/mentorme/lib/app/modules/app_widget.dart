@@ -28,7 +28,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver{
   Widget build(BuildContext context){
 
     Modular.setNavigatorKey(NavigationService.navigatorKey);
-    Modular.setInitialRoute('/');
+    Modular.setInitialRoute('/onboarding');
 
     return MaterialApp.router(
       title: 'MentorME',
