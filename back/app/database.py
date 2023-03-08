@@ -7,7 +7,7 @@ if SERVER := os.getenv('DEV_CONTAINERS'):
 else:
     SERVER = "localhost"
 
-SQLACLHEMY_DATABASE_URL = f"postgresql://user:pass@{SERVER}/database"
+SQLACLHEMY_DATABASE_URL = f"postgresql://root:root@{SERVER}/database"
 
 engine = create_engine(SQLACLHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

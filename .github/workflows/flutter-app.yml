@@ -26,8 +26,8 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: pass
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
           POSTGRES_DB: database
         # Set health checks to wait until postgres has started
         options: >-
