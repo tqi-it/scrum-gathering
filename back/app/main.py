@@ -52,6 +52,14 @@ def update_contact(contact: schemas.Contact, db: Session = Depends(get_db)):
     db_contact = crud.update_contact(db, contact)
     return db_contact
 
+@app.post("/contact_type")
+def create_contact_type(contact_type: schemas.ContactType, db: Session = Depends(get_db)):
+    db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == contact_type.type).first()
+    if db_contact_type:
+        raise HTTPException(status_code=400, detail="contact type already exists")
+    db_contact_type = crud.create_contact_type(db, contact_type)
+    return db_contact_type
+
 
 @app.post("/add_skill")
 def add_skill(skill_id: int, person_id: int, db: Session = Depends(get_db)):

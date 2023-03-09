@@ -42,6 +42,15 @@ def create_contact(db: Session, contact: schemas.Contact):
     db.refresh(contact)
     return contact
 
+def create_contact_type(db: Session, contact_type: schemas.ContactType):
+    db_contact_type = models.ContactType(
+        id=contact_type.id,
+        type=contact_type.type)
+    db.add(db_contact_type)
+    db.commit()
+    db.refresh(db_contact_type)
+    return (db_contact_type)
+
 def get_skill(db: Session, skill_id: int):
     return db.query(models.Skill).filter(models.Skill.id == skill_id).first()
 
@@ -73,7 +82,7 @@ def update_contact(db: Session, contact: schemas.Contact):
     db_query = db.query(models.Contact).filter(models.Contact.id == contact.id)
     print(contact)
     db_contact = get_contact(db, contact.id)
-    db_contact.type = db.query(models.ContactType).filter(models.ContactType.type == contact.type.type)
+    db_contact.type = db.query(models.ContactType).filter(models.ContactType.type == contact.type.type).first()
     db_contact.contact_type_id = db_contact.type.id
     db_contact.value = contact.value
     # contact_dict = {
