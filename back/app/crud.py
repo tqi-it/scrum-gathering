@@ -1,13 +1,17 @@
 from sqlalchemy.orm import Session
 
-from controller.request.request import ContactRequest
-
 import models
 import schemas
 
 
 def get_person(db: Session, person_id: int):
     return db.query(models.Person).filter(models.Person.id == person_id).first()
+
+
+def delete_person(db: Session, person_id: int):
+    person = db.query(models.Person).filter(models.Person.id == person_id).first()
+    db.delete(person)
+    db.commit()
 
 
 def create_person(db: Session, person: schemas.Person):
@@ -17,6 +21,7 @@ def create_person(db: Session, person: schemas.Person):
         mini_bio=person.mini_bio,
         can_teach=person.can_teach,
         want_to_learn=person.want_to_learn)
+    print('crud_person', person)
     db.add(db_person)
     db.commit()
     db.refresh(db_person)
@@ -31,17 +36,11 @@ def get_person_contacts(db: Session, person_id: int):
     return list(db.query(models.Contact).filter(models.Contact.person_id == person_id))
 
 
-def create_contact(db: Session, contact_request: ContactRequest):
-    db_contact_type = db.query(models.ContactType).filter(
-        models.ContactType.type == contact_request.type
-    ).first()
-    db_person = db.query(models.Person).filter(models.Person.id == contact_request.person_id).first()
-    db_contact = models.Contact(contact_type_id=db_contact_type.id,
-                            type=db_contact_type, value=contact_request.url, person_id=db_person.id)
-    db.add(db_contact)
+def create_contact(db: Session, contact: schemas.Contact):
+    db.add(contact)
     db.commit()
-    db.refresh(db_contact)
-    return db_contact
+    db.refresh(contact)
+    return contact
 
 def get_skill(db: Session, skill_id: int):
     return db.query(models.Skill).filter(models.Skill.id == skill_id).first()
@@ -98,6 +97,8 @@ def get_mentors(db: Session):
     return list(db.query(models.Person).filter(models.Person.can_teach == True))
 
 
+def get_mentoreds(db: Session):
+    return list(db.query(models.Person).filter(models.Person.want_to_learn == True))
 
 # def get_event(db: Session, event_id: int):
 #     return db.query(models.Event).filter(models.Event.id == event_id).first()

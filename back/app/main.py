@@ -7,9 +7,6 @@ import models
 import schemas
 from database import SessionLocal, engine
 
-from controller.request.request import ContactRequest
-from controller.response.response import PersonResponse, ContactResponse
-
 from controller.person import person_router
 
 models.Base.metadata.create_all(bind=engine)
@@ -42,15 +39,6 @@ def get_contact(id: int, db: Session = Depends(get_db)):
     db_contact = crud.get_contact(db, id)
     if not db_contact:
         raise HTTPException(status_code=404, detail="Contact not found")
-    return db_contact
-
-
-@app.post("/contact")
-def create_contact(contact: ContactRequest, db: Session = Depends(get_db)):
-    db_person = crud.get_person(db, contact.person_id)
-    if not db_person:
-        raise HTTPException(status_code=404, detail="Person not found")
-    db_contact = crud.create_contact(db, contact)
     return db_contact
 
 
@@ -111,25 +99,6 @@ def get_interests( person_id: int, db: Session = Depends(get_db)):
     return db_interests
 
 
-@app.get("/mentors")
-def get_mentors(db: Session = Depends(get_db)):
-    db_person = crud.get_mentors(db)
-    if not db_person:
-        raise HTTPException(status_code=404, detail="No mentors could be found")
-    mentors = []
-    for person in db_person:
-        db_contacts = crud.get_person_contacts(db, person.id)
-        contacts = []
-        if db_contacts:
-            for contact in db_contacts:
-                print('contact', contact.id, contact.type.type, contact.value)
-                contacts.append(ContactResponse(id=contact.id, type=contact.type.type, value=contact.value))
-        print('person.id', person.id)
-        person_response = PersonResponse(id=person.id, name=person.name, image=person.image_url, description=person.mini_bio, contacts=contacts)
-        print('person_response', person_response)
-        mentors.append(person_response)
-        print('mentors', mentors)
-    return mentors
 # @app.get("/event/{id}")
 # def get_event(id: int, db: Session = Depends(get_db)):
 #     db_event = crud.get_event(db, id)

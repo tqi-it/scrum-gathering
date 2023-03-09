@@ -1,14 +1,18 @@
 from pydantic import BaseModel
 
-class PersonRequest(BaseModel):
-    pass
-    
 
 class ContactRequest(BaseModel):
-    person_id: int
     type: str
-    url: str
+    value: str
 
-class ContactHistoryRequest(BaseModel):
-    person_id: int
-    
+
+class PersonRequest(BaseModel):
+    name: str
+    image: str
+    description: str
+    can_teach: bool
+    want_learn: bool
+    contacts: list[ContactRequest]
+
+
+
