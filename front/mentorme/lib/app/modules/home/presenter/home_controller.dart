@@ -1,5 +1,6 @@
 import 'package:mentorme/app/modules/home/domain/usecases/get_mentorme_usecase.dart';
 import 'package:mentorme/app/modules/home/presenter/home_store.dart';
+import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:mentorme/app/shared/utils/mentorme_states.dart';
 
 class HomeController {
@@ -16,6 +17,13 @@ class HomeController {
     response.fold(
       (error){
         store.homeState = MentorMeStates.error;
+        store.homeState = MentorMeStates.error;
+        MentorMeAlerts.showInfo(
+          title: 'Erro',
+          description: 'Aguarde alguns instantes e tente novamente',
+          buttons: [],
+          alertHeight: 130,
+        );
       },
       (response){
         store.listMentors = response.mentorEntity;
