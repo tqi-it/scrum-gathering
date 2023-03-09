@@ -1,6 +1,6 @@
 class ApiConstants {
   ///NEW BASE URL
-  static const String baseUrl = 'tqi.com.br:443';
+  static const String baseUrl = '.tqi.com.br:443';
 
   ///Api complement
   static const String complement = '/mentorme-tqi';
