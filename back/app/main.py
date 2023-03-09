@@ -63,6 +63,7 @@ def update_contact(contact: schemas.Contact, db: Session = Depends(get_db)):
     db_contact = crud.update_contact(db, contact)
     return db_contact
 
+
 @app.post("/contact_type")
 def create_contact_type(contact_type: schemas.ContactType, db: Session = Depends(get_db)):
     db_contact_type = db.query(models.ContactType).filter(models.ContactType.type == contact_type.type).first()
@@ -116,11 +117,6 @@ def get_interests( person_id: int, db: Session = Depends(get_db)):
     if not db_interests:
         raise HTTPException(status_code=404, detail="Person has no interests")
     return db_interests
-
-
-@app.post("/contact_type")
-def contact_type(contact_type_request : ContactTypeRequest, db: Session = Depends(get_db)):
-    crud.create_contact_type(db, contact_type_request)
 
 
 # @app.get("/event/{id}")
