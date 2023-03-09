@@ -78,6 +78,7 @@ class GetMentoreMeMapper {
           rate: json['rate'] ?? 0,
           contacts: getContacts(json['contacts'] ?? []),
           active: json['active'] ?? true,
+          skills: json['skills'] ?? [],
         ),
       );
     }
