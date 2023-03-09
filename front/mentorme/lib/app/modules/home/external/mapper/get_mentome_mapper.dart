@@ -15,9 +15,9 @@ class GetMentoreMeMapper {
       return contacts;
     }
 
-
     for (var json in list) {
-      mentors.add(MentorEntity(
+      mentors.add(
+        MentorEntity(
           name: json['name'] ?? '',
           phoneNumber: json['phoneNumber'] ?? '',
           id: json['id'] ?? '',
@@ -30,9 +30,10 @@ class GetMentoreMeMapper {
           likes: json['likes'] ?? 0,
           rate: json['rate'] ?? 0,
           contacts: getContacts(json['contacts'] ?? []),
-      ));
+          active: json['active'] ?? true,
+        ),
+      );
     }
-
 
     return GetMentorMeResponse(mentors);
   }

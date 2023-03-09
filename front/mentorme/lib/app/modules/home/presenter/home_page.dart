@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Mentorme'),
+            title: const Text('Mentorme'),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
@@ -49,18 +49,23 @@ class _HomePageState extends State<HomePage> {
                   color: ThemeColors.backgroundColour,
                   child: Visibility(
                     visible: controller.store.homeState == MentorMeStates.loading,
-                    replacement: Column(
-                      children: controller.store.listMentors
-                          .map((e) => MentorCardWidget(
-                        mentor: e,
-                      )).toList(),
+                    replacement: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: controller.store.listMentors
+                            .map(
+                              (e) => MentorCardWidget(
+                                mentor: e,
+                              ),
+                            ).toList(),
+                      ),
                     ),
                     child: const MentorMeSpinRing(
                       color: Colors.pink,
                       lineWidth: 3,
                       size: 50,
                     ),
-                  )
+                  ),
                 ),
               )
             ],

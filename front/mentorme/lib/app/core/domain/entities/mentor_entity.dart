@@ -10,8 +10,9 @@ class MentorEntity {
   final int slots;
   final int likes;
   final String phoneNumber;
-  final String id;
+  final int id;
   final double rate;
+  final bool active;
   final List<Contacts> contacts;
 
   MentorEntity({
@@ -26,6 +27,7 @@ class MentorEntity {
     required this.slots,
     required this.likes,
     required this.rate,
+    required this.active,
     required this.contacts,
   });
 }
