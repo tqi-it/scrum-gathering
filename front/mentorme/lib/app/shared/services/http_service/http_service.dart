@@ -20,8 +20,8 @@ class HttpService extends DioForNative implements IHttpService {
     const baseUrl = ApiConstants.baseUrl;
     const complement = ApiConstants.complement;
     const environment = ApiConstants.qaEnv;
-
-    options.baseUrl = 'https://private-97460f-mentorme.apiary-mock.com';//'$env$environment$baseUrl$complement';
+    //'https://private-97460f-mentorme.apiary-mock.com'
+    options.baseUrl = '$env$baseUrl';
     //print('$env$environment$baseUrl$complement');
   }
 

@@ -16,17 +16,17 @@ class LoginController {
           _goToLogin();
         } else {
           _httpService.setAuthorization(jwtToken);
-          _goToHome();
+          goToHome();
         }
       },
     );
   }
 
   _goToLogin() {
-    _goToHome();
+    goToHome();
   }
 
-  _goToHome() async {
+  goToHome() async {
     await Future.delayed(
       const Duration(milliseconds: 500), () {
         Modular.to.pushReplacementNamed(

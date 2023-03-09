@@ -10,7 +10,7 @@ class MentorSlideWidget extends StatelessWidget {
 
   final MentorEntity mentor = MentorEntity(
       name: "Beltrano Gomes Pereira",
-      id: "0",
+      id: 0,
       description: "",
       phoneNumber: "",
       skill: "Agilidade",
@@ -20,7 +20,7 @@ class MentorSlideWidget extends StatelessWidget {
       availability: "Manhã, tarde e noite",
       slots: 1,
       likes: 999,
-      rate: 4.9);
+      rate: 4.9, contacts: [], active: true);
 
   @override
   Widget build(BuildContext context) {

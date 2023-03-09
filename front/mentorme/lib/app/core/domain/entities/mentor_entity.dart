@@ -1,3 +1,5 @@
+import 'package:mentorme/app/core/domain/entities/contacts.dart';
+
 class MentorEntity {
   final String name;
   final String skill;
@@ -8,19 +10,24 @@ class MentorEntity {
   final int slots;
   final int likes;
   final String phoneNumber;
-  final String id;
+  final int id;
   final double rate;
+  final bool active;
+  final List<Contacts> contacts;
 
-  MentorEntity(
-      {required this.name,
-        required this.phoneNumber,
-        required this.skill,
-        required this.id,
-        required this.description,
-        required this.profile,
-        required this.imageProfile,
-        required this.availability,
-        required this.slots,
-        required this.likes,
-        required this.rate});
+  MentorEntity({
+    required this.name,
+    required this.phoneNumber,
+    required this.skill,
+    required this.id,
+    required this.description,
+    required this.profile,
+    required this.imageProfile,
+    required this.availability,
+    required this.slots,
+    required this.likes,
+    required this.rate,
+    required this.active,
+    required this.contacts,
+  });
 }
