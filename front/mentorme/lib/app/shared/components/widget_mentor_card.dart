@@ -26,14 +26,18 @@ class MentorCardWidget extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image(
-                    width: 103,
-                    height: 82,
-                    image: NetworkImage(mentor.imageProfile),
-                    fit: BoxFit.fitWidth,
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image(
+                      width: 103,
+                      height: 82,
+                      image: NetworkImage(mentor.imageProfile),
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -41,39 +45,41 @@ class MentorCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(left: 12, top: 10, right: 12),
-                        child: Text(
-                          mentor.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF535353),
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            mentor.description,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFAFAFAF),
-                              fontSize: 10,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 12, top: 10, right: 12),
+                              child: Text(
+                                mentor.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF535353),
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                          ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  mentor.description,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFAFAFAF),
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      // Text(
-                      //   mentor.availability,
-                      //   style: TextStyle(
-                      //     color: Color(0xFFAFAFAF),
-                      //     fontSize: 10,
-                      //   ),
-                      // ),
+                      const SizedBox(height: 8,),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12),
                         child: SizedBox(
@@ -81,6 +87,7 @@ class MentorCardWidget extends StatelessWidget {
                           child: MentorMeButton(
                             label: 'Fale comigo',
                             isActive: mentor.active,
+                            labelInactive: 'Indisponível',
                             onPressed: () {
                               List<MentorMeButton> buttons = [];
 
@@ -88,7 +95,7 @@ class MentorCardWidget extends StatelessWidget {
                                 buttons.add(
                                   MentorMeButton(
                                     label: element.type ?? '',
-                                    icon: element.type!.contains('Whatsapp') ? ThemeImages.whatsapp : ThemeImages.linkedin,
+                                    icon: element.icon,
                                     onPressed: () {
                                       openUrl(element.url ?? '');
                                     },
