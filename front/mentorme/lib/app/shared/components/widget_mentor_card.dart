@@ -88,33 +88,33 @@ class MentorCardWidget extends StatelessWidget {
                         child: SizedBox(
                           width: double.infinity,
                           child: MentorMeButton(
-                            label: 'Fale comigo',
+                            label: 'Saiba mais',
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
-                              // Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
-                              //   'mentor': mentor,
-                              // });
-                              List<MentorMeButton> buttons = [];
-
-                              for (var element in mentor.contacts) {
-                                buttons.add(
-                                  MentorMeButton(
-                                    label: element.type ?? '',
-                                    icon: element.icon,
-                                    onPressed: () {
-                                      openUrl(element.url ?? '');
-                                    },
-                                    isActive: true,
-                                  ),
-                                );
-                              }
-
-                              MentorMeAlerts.showInfo(
-                                title: 'Agende sua mentoria',
-                                description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
-                                buttons: buttons,
-                              );
+                              Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
+                                'mentor': mentor,
+                              });
+                              // List<MentorMeButton> buttons = [];
+                              //
+                              // for (var element in mentor.contacts) {
+                              //   buttons.add(
+                              //     MentorMeButton(
+                              //       label: element.type ?? '',
+                              //       icon: element.icon,
+                              //       onPressed: () {
+                              //         openUrl(element.url ?? '');
+                              //       },
+                              //       isActive: true,
+                              //     ),
+                              //   );
+                              // }
+                              //
+                              // MentorMeAlerts.showInfo(
+                              //   title: 'Agende sua mentoria',
+                              //   description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
+                              //   buttons: buttons,
+                              // );
                             },
                           ),
                         ),

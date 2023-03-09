@@ -16,7 +16,7 @@ class _MentorProfilePageState extends State<MentorProfilePage> {
   Widget build(BuildContext context) {
     return MentorMeContentPage(
       pageName: 'Profile',
-      appBar: const MentorMeBigAppBar(pageName: 'Profile',),
+      appBar: MentorMeBigAppBar(pageName: 'Perfil', mentor: widget.mentorEntity,),
       child: Container(),
     );
   }
