@@ -5,6 +5,7 @@ import 'package:mentorme/app/modules/home/infra/repositories/get_mentorme_reposi
 import 'package:mentorme/app/modules/home/presenter/home_controller.dart';
 import 'package:mentorme/app/modules/home/presenter/home_page.dart';
 import 'package:mentorme/app/modules/home/presenter/home_store.dart';
+import 'package:mentorme/app/modules/home/presenter/mentor_profile/mentor_profile_page.dart';
 
 
 class HomeModule extends Module {
@@ -23,6 +24,11 @@ class HomeModule extends Module {
     ChildRoute(
       '/',
       child: (__, args) => const HomePage(),
+      transition: TransitionType.rightToLeft,
+    ),
+    ChildRoute(
+      '/mentor_profile_page',
+      child: (__, args) => MentorProfilePage(mentorEntity: args.data['mentor'],),
       transition: TransitionType.rightToLeft,
     ),
   ];

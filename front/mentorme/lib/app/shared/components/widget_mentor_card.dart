@@ -3,6 +3,7 @@ import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
 import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:mentorme/app/shared/theme/images.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void openUrl(String url) async {
@@ -79,7 +80,9 @@ class MentorCardWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12),
                         child: SizedBox(
@@ -89,6 +92,9 @@ class MentorCardWidget extends StatelessWidget {
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
+                              // Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
+                              //   'mentor': mentor,
+                              // });
                               List<MentorMeButton> buttons = [];
 
                               for (var element in mentor.contacts) {
