@@ -9,6 +9,8 @@ from database import SessionLocal, engine
 
 from controller.person import person_router
 
+from controller.request.request import ContactTypeRequest
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -33,6 +35,15 @@ def get_db():
 
 app.include_router(person_router)
 
+
+@app.post("/person")
+def create_person(person: schemas.Person, db: Session = Depends(get_db)):
+    print('person_create', person)
+    db_person = crud.get_person(db, person.id)
+    if db_person:
+        raise HTTPException(status_code=400, detail="Person already exists")
+    db_person = crud.create_person(db, person)
+    return db_person
 
 @app.get("/contact/{id}")
 def get_contact(id: int, db: Session = Depends(get_db)):
@@ -97,6 +108,11 @@ def get_interests( person_id: int, db: Session = Depends(get_db)):
     if not db_interests:
         raise HTTPException(status_code=404, detail="Person has no interests")
     return db_interests
+
+
+@app.post("/contact_type")
+def contact_type(contact_type_request : ContactTypeRequest, db: Session = Depends(get_db)):
+    crud.create_contact_type(db, contact_type_request)
 
 
 # @app.get("/event/{id}")

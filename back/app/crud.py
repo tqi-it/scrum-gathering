@@ -21,7 +21,7 @@ def create_person(db: Session, person: schemas.Person):
         mini_bio=person.mini_bio,
         can_teach=person.can_teach,
         want_to_learn=person.want_to_learn)
-    print('crud_person', person)
+    print('crud_person', db_person)
     db.add(db_person)
     db.commit()
     db.refresh(db_person)

@@ -35,7 +35,7 @@ class Person(BaseModel):
     mini_bio: str
     can_teach: bool
     want_to_learn: bool
-    contacts: Contact
+    contacts: Contact|None
 
     class Config:
          orm_mode = True
