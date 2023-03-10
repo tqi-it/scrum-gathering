@@ -15,59 +15,90 @@ class MentorDetailContent extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Habilidades",
-            style: TextStyle(
-                fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: mentor.skills
-                      .map((skill) =>
-                          MentorMeButton(label: skill, isActive: true))
-                      .toList(),
-                ),
-              ))
-            ],
-          ),
-          const Text(
-            "Sobre mim:",
-            style: TextStyle(
-                fontSize: 15, color: Colors.black, fontWeight: FontWeight.w700),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              mentor.description,
-              style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400),
-            ),
-          ),
           Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: MentorMeButton(
-                    onPressed: () {},
-                    label: "Fale comigo",
-                    isActive: true,
-                    radius: 6,
-                  )),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Habilidades",
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          child: Row(
+                            children: mentor.skills
+                                .map((skill) => Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 6),
+                                      margin: EdgeInsets.only(
+                                          right: mentor.skills.last == skill
+                                              ? 0
+                                              : 15),
+                                      decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Text(
+                                        skill,
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white),
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Sobre mim:",
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      mentor.description,
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          SizedBox(height: 10,),
+          SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: MentorMeButton(
+                onPressed: () {},
+                label: "Fale comigo",
+                isActive: true,
+                radius: 6,
+              )),
         ],
       ),
     );
