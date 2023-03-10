@@ -20,95 +20,103 @@ class MentorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image(
-                      width: 103,
-                      height: 82,
-                      image: NetworkImage(mentor.imageProfile),
-                      fit: BoxFit.fitWidth,
+    return InkWell(
+      onTap: () {
+        Modular.to.pushNamed('/home/mentor_profile_page',
+            arguments: {
+              'mentor': mentor,
+            });
+      },
+      child: Card(
+        color: Colors.white,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image(
+                        width: 103,
+                        height: 82,
+                        image: NetworkImage(mentor.imageProfile),
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  left: 12, top: 10, right: 12),
-                              child: Text(
-                                mentor.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF535353),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 2),
-                              child: SizedBox(
-                                width: double.infinity,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    left: 12, top: 10, right: 12),
                                 child: Text(
-                                  mentor.description,
+                                  mentor.name,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFFAFAFAF),
-                                    fontSize: 16,
+                                    color: Color(0xFF535353),
+                                    fontSize: 18,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: MentorMeButton(
-                            label: 'Saiba mais',
-                            isActive: mentor.active,
-                            labelInactive: 'Indisponível',
-                            onPressed: () {
-                              Modular.to.pushNamed('/home/mentor_profile_page',
-                                  arguments: {
-                                    'mentor': mentor,
-                                  });
-                            },
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 2),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    mentor.description,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFAFAFAF),
+                                      fontSize: 16,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: MentorMeButton(
+                              label: 'Saiba mais',
+                              isActive: mentor.active,
+                              labelInactive: 'Indisponível',
+                              onPressed: () {
+                                Modular.to.pushNamed('/home/mentor_profile_page',
+                                    arguments: {
+                                      'mentor': mentor,
+                                    });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
