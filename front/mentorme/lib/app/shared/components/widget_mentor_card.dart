@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
+import 'package:mentorme/app/modules/home/presenter/home_controller.dart';
 import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:mentorme/app/shared/theme/images.dart';
@@ -13,6 +14,7 @@ void openUrl(String url) async {
 }
 
 class MentorCardWidget extends StatelessWidget {
+
   const MentorCardWidget({super.key, required this.mentor});
 
   final MentorEntity mentor;
@@ -92,6 +94,7 @@ class MentorCardWidget extends StatelessWidget {
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
+                              final controller = Modular.get<HomeController>();
                               // Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
                               //   'mentor': mentor,
                               // });
@@ -103,6 +106,7 @@ class MentorCardWidget extends StatelessWidget {
                                     label: element.type ?? '',
                                     icon: element.icon,
                                     onPressed: () {
+                                      controller.doFetchRegisterContact(element, mentor.id);
                                       openUrl(element.url ?? '');
                                     },
                                     isActive: true,
