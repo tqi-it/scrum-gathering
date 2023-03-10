@@ -10,7 +10,7 @@ class MentorMeAlerts {
     required final String title,
     required final String description,
     final List<MentorMeButton>? buttons,
-    final double? alertHeight = 217,
+    final double? alertHeight = 185,
     final bool? disableHeight = false,
     final bool? isDismissible,
   }) async {
