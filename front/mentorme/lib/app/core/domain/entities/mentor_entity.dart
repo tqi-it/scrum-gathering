@@ -14,7 +14,7 @@ class MentorEntity {
   final double rate;
   final bool active;
   final List<Contacts> contacts;
-  final List<String> skills;
+  final List<dynamic> skills;
 
   MentorEntity({
     required this.name,
