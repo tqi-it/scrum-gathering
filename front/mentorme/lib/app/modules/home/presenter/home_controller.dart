@@ -3,6 +3,7 @@ import 'package:mentorme/app/modules/home/domain/entities/contact_history_entity
 import 'package:mentorme/app/modules/home/domain/params/contact_history_params.dart';
 import 'package:mentorme/app/modules/home/domain/usecases/contact_history_usecase.dart';
 import 'package:mentorme/app/modules/home/domain/usecases/get_mentorme_usecase.dart';
+import 'package:mentorme/app/modules/home/domain/usecases/skill_usecase.dart';
 import 'package:mentorme/app/modules/home/presenter/home_store.dart';
 import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,9 +13,21 @@ class HomeController {
   final HomeStore store;
   final GetMentorMeUsecase _getMentorMeUsecase;
   final ContactHistoryUsecase _contactHistoryUsecase;
+  final SkillUsecase _skillUsecase;
 
-  HomeController(
-      this.store, this._getMentorMeUsecase, this._contactHistoryUsecase);
+  HomeController(this.store,
+      this._getMentorMeUsecase,
+      this._contactHistoryUsecase,
+      this._skillUsecase,);
+
+  void doFetchSkillList() async {
+    final response = await _skillUsecase();
+    response.fold((l) {
+      print(l);
+    }, (r) {
+      print(r);
+    });
+  }
 
   void doFetchRegisterContact(Contacts contacts, int mentorId) async {
     final params = ContactHistoryParams(ContactHistoryEntity(
@@ -31,7 +44,7 @@ class HomeController {
     final response = await _getMentorMeUsecase();
 
     response.fold(
-      (error) {
+          (error) {
         store.homeState = MentorMeStates.error;
         MentorMeAlerts.showInfo(
           title: 'Erro',
@@ -40,7 +53,7 @@ class HomeController {
           alertHeight: 130,
         );
       },
-      (response) {
+          (response) {
         store.listMentors = response.mentorEntity;
         store.homeState = MentorMeStates.success;
       },

@@ -94,31 +94,9 @@ class MentorCardWidget extends StatelessWidget {
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
-                              final controller = Modular.get<HomeController>();
-                              // Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
-                              //   'mentor': mentor,
-                              // });
-                              List<MentorMeButton> buttons = [];
-
-                              for (var element in mentor.contacts) {
-                                buttons.add(
-                                  MentorMeButton(
-                                    label: element.type ?? '',
-                                    icon: element.icon,
-                                    onPressed: () {
-                                      controller.doFetchRegisterContact(element, mentor.id);
-                                      openUrl(element.url ?? '');
-                                    },
-                                    isActive: true,
-                                  ),
-                                );
-                              }
-
-                              MentorMeAlerts.showInfo(
-                                title: 'Agende sua mentoria',
-                                description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
-                                buttons: buttons,
-                              );
+                              Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
+                                'mentor': mentor,
+                              });
                             },
                           ),
                         ),
