@@ -7,7 +7,9 @@ class MentorMeBigAppBar extends StatelessWidget {
   final String pageName;
   final MentorEntity mentor;
 
-  const MentorMeBigAppBar({Key? key, this.onTap, required this.pageName, required this.mentor}) : super(key: key);
+  const MentorMeBigAppBar(
+      {Key? key, this.onTap, required this.pageName, required this.mentor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +17,15 @@ class MentorMeBigAppBar extends StatelessWidget {
       padding: EdgeInsets.only(top: 18),
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(top: AppBar().preferredSize.height),
-      height: 173,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color.fromARGB(204, 10, 125, 184), Color.fromARGB(204, 0, 40, 60)],
-        ),
-      ),
+      height: 175,
+      color: const Color(0xFF0A7DB8),
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //     colors: [Color(0xFF0A7DB8), Color(0xFF00283C)],
+      //   ),
+      // ),
       child: Column(
         children: [
           Stack(
@@ -66,17 +69,19 @@ class MentorMeBigAppBar extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: ClipOval(
-              child: Image(
-                width: 70,
-                image: NetworkImage(mentor.imageProfile),
-                fit: BoxFit.fitWidth,
-              ),
+            child: CircleAvatar(
+              radius: 36,
+              backgroundImage: NetworkImage(mentor.imageProfile),
+              backgroundColor: Colors.transparent,
             ),
           ),
-          const SizedBox(height:  5),
+          const SizedBox(height: 5),
           Text(mentor.name,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white,)),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              )),
           const SizedBox(height: 19)
         ],
       ),

@@ -25,7 +25,7 @@ def get_person(id: int, db: Session = Depends(get_db)):
     db_person = crud.get_person(db, id)
     if not db_person:
         raise HTTPException(status_code=404, detail="Person not found")
-    db_contacts = crud.get_person_contacts(db, person.id)
+    db_contacts = crud.get_person_contacts(db, db_person.id)
     contacts = []
     if db_contacts:
         for contact in db_contacts:
@@ -39,21 +39,25 @@ def get_person(id: int, db: Session = Depends(get_db)):
 @person_router.post("/create")
 def create(person: PersonRequest, db: Session = Depends(get_db)):
     print('person', person)
-    db_contacts = []
-    if person.contacts:
-        for contact_request in person.contacts:
-            db_contacts.append(models.Contact(contact_type_id=contact_request.id,
-                                        type=contact_request.type, value=contact_request.value, person_id=person.id))
     db_person = schemas.Person(
+        id=0,
         name=person.name,
         image_url=person.image,
         mini_bio=person.description,
         can_teach=person.can_teach,
-        want_to_learn=person.want_learn,
-        contracts = db_contacts)
+        want_to_learn=person.want_learn)
     print('dbperson', db_person)
-    created_person = crud.create_person(db_person)
-    return get_person(db, created_person.id)
+    created_person = crud.create_person(db, db_person)
+    print('created_person', created_person)
+    if person.contacts:
+        for request_contact in person.contacts:
+            print('request_contact', request_contact)
+            print('created_person.id', created_person.id)
+            db_contact = models.Contact(id=0, contact_type_id=request_contact.type_id,
+                                        value=request_contact.value, person_id=created_person.id)
+            print('db_contact',db_contact)
+            crud.create_contact(db, db_contact)
+    return get_person(created_person.id, db)
 
 
 @person_router.get("/delete/{id}")

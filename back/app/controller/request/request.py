@@ -1,7 +1,13 @@
 from pydantic import BaseModel
 
 
+class ContactTypeRequest(BaseModel):
+    id: int
+    name: str
+
+
 class ContactRequest(BaseModel):
+    type_id: int
     type: str
     value: str
 
