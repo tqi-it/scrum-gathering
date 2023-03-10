@@ -9,6 +9,8 @@ from database import SessionLocal, engine
 
 from controller.person import person_router
 
+from controller.request.request import ContactTypeRequest
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -34,6 +36,15 @@ def get_db():
 app.include_router(person_router)
 
 
+@app.post("/person")
+def create_person(person: schemas.Person, db: Session = Depends(get_db)):
+    print('person_create', person)
+    db_person = crud.get_person(db, person.id)
+    if db_person:
+        raise HTTPException(status_code=400, detail="Person already exists")
+    db_person = crud.create_person(db, person)
+    return db_person
+
 @app.get("/contact/{id}")
 def get_contact(id: int, db: Session = Depends(get_db)):
     db_contact = crud.get_contact(db, id)
@@ -51,6 +62,7 @@ def update_contact(contact: schemas.Contact, db: Session = Depends(get_db)):
         raise HTTPException(status_code=403, detail="Access forbidden")
     db_contact = crud.update_contact(db, contact)
     return db_contact
+
 
 @app.post("/contact_type")
 def create_contact_type(contact_type: schemas.ContactType, db: Session = Depends(get_db)):
