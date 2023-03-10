@@ -23,10 +23,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(204, 10, 125, 184),
-              Color.fromARGB(204, 0, 40, 60)
-            ],
+            colors: [Color(0xFF0A7DB8), Color(0xFF00283C)],
           ),
         ),
         child: Column(
