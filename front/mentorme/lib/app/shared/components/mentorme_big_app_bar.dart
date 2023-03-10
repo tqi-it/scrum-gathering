@@ -18,13 +18,14 @@ class MentorMeBigAppBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(top: AppBar().preferredSize.height),
       height: 175,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF0A7DB8), Color(0xFF00283C)],
-        ),
-      ),
+      color: const Color(0xFF0A7DB8),
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //     colors: [Color(0xFF0A7DB8), Color(0xFF00283C)],
+      //   ),
+      // ),
       child: Column(
         children: [
           Stack(
