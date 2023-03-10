@@ -22,10 +22,12 @@ class MentorCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Modular.to.pushNamed('/home/mentor_profile_page',
-            arguments: {
-              'mentor': mentor,
-            });
+        if (mentor.active) {
+          Modular.to.pushNamed('/home/mentor_profile_page',
+              arguments: {
+                'mentor': mentor,
+              });
+        }
       },
       child: Card(
         color: Colors.white,
