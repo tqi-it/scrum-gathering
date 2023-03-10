@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     return RxBuilder(
       builder: (_){
         return MentorMeContentPage(
+          pageName: 'Mentorme',
           child: Column(
             children: [
               Expanded(
@@ -37,16 +38,20 @@ class _HomePageState extends State<HomePage> {
                   color: ThemeColors.backgroundColour,
                   child: Visibility(
                     visible: controller.store.homeState == MentorMeStates.loading,
-                    replacement: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        children: controller.store.listMentors
-                            .map(
-                              (e) => MentorCardWidget(
-                            mentor: e,
-                          ),
-                        )
-                            .toList(),
+                    replacement: RefreshIndicator(
+                      onRefresh: ()async{
+                        controller.doFetchmentor();
+                      },
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: controller.store.listMentors
+                              .map(
+                                (e) => MentorCardWidget(
+                              mentor: e,
+                            ),
+                          ).toList(),
+                        ),
                       ),
                     ),
                     child: const MentorMeSpinRing(

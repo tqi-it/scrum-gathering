@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
+import 'package:mentorme/app/modules/home/presenter/home_controller.dart';
 import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/mentorme_alert.dart';
 import 'package:mentorme/app/shared/theme/images.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void openUrl(String url) async {
@@ -12,6 +14,7 @@ void openUrl(String url) async {
 }
 
 class MentorCardWidget extends StatelessWidget {
+
   const MentorCardWidget({super.key, required this.mentor});
 
   final MentorEntity mentor;
@@ -79,16 +82,22 @@ class MentorCardWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12),
                         child: SizedBox(
                           width: double.infinity,
                           child: MentorMeButton(
-                            label: 'Fale comigo',
+                            label: 'Saiba mais',
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
+                              final controller = Modular.get<HomeController>();
+                              // Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
+                              //   'mentor': mentor,
+                              // });
                               List<MentorMeButton> buttons = [];
 
                               for (var element in mentor.contacts) {
@@ -97,6 +106,7 @@ class MentorCardWidget extends StatelessWidget {
                                     label: element.type ?? '',
                                     icon: element.icon,
                                     onPressed: () {
+                                      controller.doFetchRegisterContact(element, mentor.id);
                                       openUrl(element.url ?? '');
                                     },
                                     isActive: true,
