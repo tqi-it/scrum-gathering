@@ -14,7 +14,6 @@ void openUrl(String url) async {
 }
 
 class MentorCardWidget extends StatelessWidget {
-
   const MentorCardWidget({super.key, required this.mentor});
 
   final MentorEntity mentor;
@@ -53,7 +52,8 @@ class MentorCardWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(left: 12, top: 10, right: 12),
+                              margin: const EdgeInsets.only(
+                                  left: 12, top: 10, right: 12),
                               child: Text(
                                 mentor.name,
                                 style: const TextStyle(
@@ -64,7 +64,8 @@ class MentorCardWidget extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 2),
                               child: SizedBox(
                                 width: double.infinity,
                                 child: Text(
@@ -94,9 +95,10 @@ class MentorCardWidget extends StatelessWidget {
                             isActive: mentor.active,
                             labelInactive: 'Indisponível',
                             onPressed: () {
-                              Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
-                                'mentor': mentor,
-                              });
+                              Modular.to.pushNamed('/home/mentor_profile_page',
+                                  arguments: {
+                                    'mentor': mentor,
+                                  });
                             },
                           ),
                         ),

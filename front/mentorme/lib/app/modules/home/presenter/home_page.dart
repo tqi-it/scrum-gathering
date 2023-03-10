@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     return RxBuilder(
       builder: (_){
         return MentorMeContentPage(
-          pageName: 'Mentorme',
+          pageName: 'Mentorize',
           child: Column(
             children: [
               Expanded(
