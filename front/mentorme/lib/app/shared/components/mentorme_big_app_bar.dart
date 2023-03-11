@@ -18,7 +18,7 @@ class MentorMeBigAppBar extends StatelessWidget {
 
       backgroundColor: Color(0xFF0A7DB8),
       flexibleSpace: Container(
-        padding: EdgeInsets.only(top: 18),
+        padding: EdgeInsets.only(top: 10),
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.only(top: AppBar().preferredSize.height),
         height: 175,
