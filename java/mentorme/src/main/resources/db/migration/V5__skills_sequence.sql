@@ -1,0 +1,4 @@
+
+CREATE SEQUENCE skill_to_learn_sequence START WITH 7 INCREMENT BY 1;
+
+CREATE SEQUENCE skill_to_teach_sequence START WITH 7 INCREMENT BY 1;

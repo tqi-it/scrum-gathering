@@ -1,4 +1,4 @@
-package br.com.agile.communit.mentorme.model;
+package br.com.agile.communit.mentorme.enums;
 
 public enum Gender {
 

@@ -9,8 +9,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ContactHistoryRequest {
 
-	@JsonProperty("person_from")
-	private Integer personFrom;
 	@JsonProperty("person_to")
 	private Integer personTo;
 	@JsonProperty("contact_value")
@@ -18,8 +16,5 @@ public class ContactHistoryRequest {
 	@JsonProperty("contact_type")
 	private String contactType;
 
-	private boolean mentoring;
-
 	private boolean mentor;
-
 }
