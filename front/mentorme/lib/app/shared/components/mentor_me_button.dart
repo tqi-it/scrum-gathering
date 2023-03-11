@@ -8,8 +8,9 @@ class MentorMeButton extends StatelessWidget {
   final double? radius;
   final String? icon;
   final double? height;
+  final TextStyle? textStyle;
 
-  const MentorMeButton({Key? key, this.onPressed, required this.label, this.radius, this.icon, this.labelInactive = '', required this.isActive, this.height})
+  const MentorMeButton({Key? key, this.onPressed, required this.label, this.radius, this.icon, this.labelInactive = '', required this.isActive, this.height, this.textStyle})
       : super(key: key);
 
   @override
@@ -39,7 +40,7 @@ class MentorMeButton extends StatelessWidget {
             Expanded(
               child: Text(
                 isActive ? label : labelInactive ?? '',
-                style: const TextStyle(
+                style: textStyle ?? const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

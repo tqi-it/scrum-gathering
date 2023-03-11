@@ -20,14 +20,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    controller.doFetchmentor();
+    controller.initHome();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return RxBuilder(
-      builder: (_){
+      builder: (_) {
         return MentorMeContentPage(
           pageName: 'Mentorize',
           child: Column(
@@ -39,24 +39,72 @@ class _HomePageState extends State<HomePage> {
                   child: Visibility(
                     visible: controller.store.homeState == MentorMeStates.loading,
                     replacement: RefreshIndicator(
-                      onRefresh: ()async{
-                        controller.doFetchmentor();
-                      },
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: controller.store.listMentors
-                              .map(
-                                (e) => Container(
-                                  margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                                  child: MentorCardWidget(
-                              mentor: e,
-                            ),
+                        onRefresh: () async {
+                          controller.doFetchmentor();
+                        },
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(right: 15, left: 15),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        controller.openBottomsheetFilterskills();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            'Filtrar',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0XFF0497E3),
+                                            ),
+                                          ),
+                                          const Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            color: Color(0XFF0497E3),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                          ).toList(),
-                        ),
-                      ),
-                    ),
+                              ),
+                              controller.store.listMentors.isEmpty
+                                  ? Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Nenhum mentor encontrado!',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0XFF0497E3),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Column(
+                                      children: controller.store.listMentors
+                                          .map(
+                                            (e) => Container(
+                                              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                                              child: MentorCardWidget(
+                                                mentor: e,
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                            ],
+                          ),
+                        )),
                     child: const MentorMeSpinRing(
                       color: Colors.pink,
                       lineWidth: 3,

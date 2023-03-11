@@ -16,7 +16,7 @@ class GetMentorMeUsecase extends IGetMentorMeUsecase {
   @override
   Future<Either<IError, GetMentorMeResponse>> call({GetMentorMeParams? params}) async {
 
-    final result = await repository(params);
+    final result = await repository(params ?? GetMentorMeParams(skills: []));
     return result;
   }
 }

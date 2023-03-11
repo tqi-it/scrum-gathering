@@ -25,6 +25,7 @@ class GetMentorMeDatasource extends IGetMentorMeDatasource {
 
       final _response = await httpService.post(
         Endpoints.getMentorMe,
+        data: params!.toBodyRequest(),
       );
 
       final _finalResponse = GetMentoreMeMapper.fromJson(_response.data);

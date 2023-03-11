@@ -1,7 +1,23 @@
+import 'package:mentorme/app/modules/home/domain/entities/skill_entity.dart';
+
 class GetMentorMeParams {
-  final String? userId;
+  final List<SkillEntity>? skills;
 
   GetMentorMeParams({
-    this.userId,
+    required this.skills,
   });
+
+  List toBodyRequest() {
+    List<Map<String, dynamic>> skillsIds = [];
+
+    for (var element in skills!) {
+      skillsIds.add(
+        {
+          'id': element.id,
+        },
+      );
+    }
+
+    return skillsIds;
+  }
 }
