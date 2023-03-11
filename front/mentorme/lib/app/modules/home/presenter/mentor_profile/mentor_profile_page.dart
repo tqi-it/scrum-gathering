@@ -6,7 +6,9 @@ import 'package:mentorme/app/shared/components/mentorme_detail_content.dart';
 
 class MentorProfilePage extends StatefulWidget {
   final MentorEntity mentorEntity;
-  const MentorProfilePage({Key? key, required this.mentorEntity}) : super(key: key);
+
+  const MentorProfilePage({Key? key, required this.mentorEntity})
+      : super(key: key);
 
   @override
   State<MentorProfilePage> createState() => _MentorProfilePageState();
@@ -17,7 +19,10 @@ class _MentorProfilePageState extends State<MentorProfilePage> {
   Widget build(BuildContext context) {
     return MentorMeContentPage(
       pageName: 'Profile',
-      appBar: MentorMeBigAppBar(pageName: 'Perfil', mentor: widget.mentorEntity,),
+      appBar: MentorMeBigAppBar(
+        pageName: 'Perfil',
+        mentor: widget.mentorEntity,
+      ),
       child: MentorDetailContent(mentor: widget.mentorEntity),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
 import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/widget_mentor_card.dart';
+import 'package:mentorme/app/shared/theme/dimens.dart';
 
 import '../../modules/home/presenter/home_controller.dart';
 import 'mentorme_alert.dart';
@@ -30,7 +31,7 @@ class MentorDetailContent extends StatelessWidget {
                     "Posso mentorar em:",
                     style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black,
+                        color: Color(0xFF535353),
                         fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
@@ -76,7 +77,7 @@ class MentorDetailContent extends StatelessWidget {
                     "Sobre mim:",
                     style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black,
+                        color: Color(0xFF535353),
                         fontWeight: FontWeight.w700),
                   ),
                   Container(
@@ -85,7 +86,7 @@ class MentorDetailContent extends StatelessWidget {
                       mentor.description,
                       style: const TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Color(0xFF535353),
                           fontWeight: FontWeight.w400),
                     ),
                   ),
@@ -93,40 +94,91 @@ class MentorDetailContent extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10,),
-          SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: MentorMeButton(
-                onPressed: () {
-                  final controller = Modular.get<HomeController>();
-
-                  List<MentorMeButton> buttons = [];
-
-                  for (var element in mentor.contacts) {
-                    buttons.add(
-                      MentorMeButton(
-                        label: element.type ?? '',
-                        icon: element.icon,
-                        onPressed: () {
-                          controller.doFetchRegisterContact(element, mentor.id);
-                          openUrl(element.url ?? '');
-                        },
-                        isActive: true,
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: ThemeDimens.smallSpace),
+              const Text(
+                "Fale comigo:",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF535353),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(height: ThemeDimens.smallSpace),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: mentor.contacts
+                    .map(
+                      (element) => Flexible(
+                        child: Container(
+                          height: 50,
+                          margin: EdgeInsets.only(
+                              right: element == mentor.contacts.last
+                                  ? 0
+                                  : ThemeDimens.smallSpace),
+                          child: MentorMeButton(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                            radius: 6,
+                            label: element.type ?? '',
+                            icon: element.icon,
+                            onPressed: () {
+                              final controller = Modular.get<HomeController>();
+                              controller.doFetchRegisterContact(
+                                  element, mentor.id);
+                              openUrl(element.url ?? '');
+                            },
+                            isActive: true,
+                          ),
+                        ),
                       ),
-                    );
-                  }
+                    )
+                    .toList(),
+                /*children: [
+                MentorMeButton(
+                  onPressed: () {
+                    final controller = Modular.get<HomeController>();
 
-                  MentorMeAlerts.showInfo(
-                    title: 'Agende sua mentoria',
-                    description: 'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
-                    buttons: buttons,
-                  );
-                },
-                label: "Fale comigo",
-                isActive: true,
-                radius: 6,
-              )),
+                    List<MentorMeButton> buttons = [];
+
+                    for (var element in mentor.contacts) {
+                      buttons.add(
+                        MentorMeButton(
+                          label: element.type ?? '',
+                          icon: element.icon,
+                          onPressed: () {
+                            controller.doFetchRegisterContact(element, mentor.id);
+                            openUrl(element.url ?? '');
+                          },
+                          isActive: true,
+                        ),
+                      );
+                    }
+
+                    MentorMeAlerts.showInfo(
+                      title: 'Agende sua mentoria',
+                      description:
+                          'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
+                      buttons: buttons,
+                    );
+                  },
+                  label: "Fale comigo",
+                  isActive: true,
+                  radius: 6,
+                )
+              ]*/
+              ),
+            ],
+          ),
         ],
       ),
     );
