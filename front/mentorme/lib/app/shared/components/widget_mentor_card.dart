@@ -40,7 +40,7 @@ class MentorCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 1),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image(
@@ -62,7 +62,7 @@ class MentorCardWidget extends StatelessWidget {
                             children: [
                               Container(
                                 margin: const EdgeInsets.only(
-                                    left: 12, top: 10, right: 12),
+                                    left: 12, top: 1, right: 12),
                                 child: Text(
                                   mentor.name,
                                   style: const TextStyle(
@@ -80,8 +80,8 @@ class MentorCardWidget extends StatelessWidget {
                                   child: Text(
                                     mentor.description,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFAFAFAF),
+                                      fontWeight: FontWeight.normal,
+                                      color: Color(0xFF535353),
                                       fontSize: 16,
                                     ),
                                     overflow: TextOverflow.ellipsis,
@@ -95,28 +95,44 @@ class MentorCardWidget extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: MentorMeButton(
-                              label: 'Saiba mais',
-                              isActive: mentor.active,
-                              labelInactive: 'Indisponível',
-                              onPressed: () {
-                                Modular.to.pushNamed('/home/mentor_profile_page',
-                                    arguments: {
-                                      'mentor': mentor,
-                                    });
-                              },
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      child: Row(
+                        children: mentor.skills
+                            .map((skill) => Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          margin: EdgeInsets.only(
+                              right: mentor.skills.last == skill
+                                  ? 0
+                                  : 15),
+                          decoration: BoxDecoration(
+                              color: Colors.pink,
+                              borderRadius:
+                              BorderRadius.circular(20)),
+                          child: Text(
+                            skill,
+                            style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          ),
+                        ))
+                            .toList(),
+                      ),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),

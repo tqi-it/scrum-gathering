@@ -47,9 +47,12 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: controller.store.listMentors
                               .map(
-                                (e) => MentorCardWidget(
+                                (e) => Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                                  child: MentorCardWidget(
                               mentor: e,
                             ),
+                                ),
                           ).toList(),
                         ),
                       ),
