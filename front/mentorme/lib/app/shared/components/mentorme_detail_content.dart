@@ -27,7 +27,7 @@ class MentorDetailContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Habilidades",
+                    "Posso mentorar em:",
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
