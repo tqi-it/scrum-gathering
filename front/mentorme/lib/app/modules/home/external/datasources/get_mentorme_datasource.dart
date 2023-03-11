@@ -23,7 +23,7 @@ class GetMentorMeDatasource extends IGetMentorMeDatasource {
       httpService.setEnviroment(_enviroment);
       httpService.disableCertificates(httpService);
 
-      final _response = await httpService.get(
+      final _response = await httpService.post(
         Endpoints.getMentorMe,
       );
 
