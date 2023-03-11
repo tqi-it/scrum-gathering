@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mentorme/app/shared/components/mentorme_air_spin_ring.dart';
+import 'package:mentorme/app/shared/components/mentorme_content_page.dart';
 import 'package:mentorme/app/shared/theme/theme_colors.dart';
 import 'package:mentorme/app/shared/utils/mentorme_states.dart';
 import 'package:rx_notifier/rx_notifier.dart';
@@ -26,22 +27,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return RxBuilder(
-      builder: (_) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Mentorme'),
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color.fromARGB(204, 10, 125, 184), Color.fromARGB(204, 0, 40, 60)],
-                ),
-              ),
-            ),
-          ),
-          body: Column(
+      builder: (_){
+        return MentorMeContentPage(
+          pageName: 'Mentorize',
+          child: Column(
             children: [
               Expanded(
                 child: Container(
@@ -49,15 +38,23 @@ class _HomePageState extends State<HomePage> {
                   color: ThemeColors.backgroundColour,
                   child: Visibility(
                     visible: controller.store.homeState == MentorMeStates.loading,
-                    replacement: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        children: controller.store.listMentors
-                            .map(
-                              (e) => MentorCardWidget(
-                                mentor: e,
-                              ),
-                            ).toList(),
+                    replacement: RefreshIndicator(
+                      onRefresh: ()async{
+                        controller.doFetchmentor();
+                      },
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: controller.store.listMentors
+                              .map(
+                                (e) => Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                                  child: MentorCardWidget(
+                              mentor: e,
+                            ),
+                                ),
+                          ).toList(),
+                        ),
                       ),
                     ),
                     child: const MentorMeSpinRing(

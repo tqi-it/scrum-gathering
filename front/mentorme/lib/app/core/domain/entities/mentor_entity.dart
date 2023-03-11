@@ -14,6 +14,7 @@ class MentorEntity {
   final double rate;
   final bool active;
   final List<Contacts> contacts;
+  final List<dynamic> skills;
 
   MentorEntity({
     required this.name,
@@ -29,5 +30,6 @@ class MentorEntity {
     required this.rate,
     required this.active,
     required this.contacts,
+    required this.skills,
   });
 }

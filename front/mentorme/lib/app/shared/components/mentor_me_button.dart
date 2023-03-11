@@ -7,8 +7,9 @@ class MentorMeButton extends StatelessWidget {
   final bool isActive;
   final double? radius;
   final String? icon;
+  final double? height;
 
-  const MentorMeButton({Key? key, this.onPressed, required this.label, this.radius, this.icon, this.labelInactive = '', required this.isActive})
+  const MentorMeButton({Key? key, this.onPressed, required this.label, this.radius, this.icon, this.labelInactive = '', required this.isActive, this.height})
       : super(key: key);
 
   @override
@@ -17,6 +18,7 @@ class MentorMeButton extends StatelessWidget {
       onTap: isActive ? onPressed ?? () {} : () {},
       child: Container(
         padding: const EdgeInsets.only(top: 5, bottom: 5),
+        height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 50),
           color: isActive ? Colors.pink : Colors.grey,
