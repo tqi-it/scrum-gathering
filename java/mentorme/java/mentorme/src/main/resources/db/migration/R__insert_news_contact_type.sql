@@ -1,0 +1,12 @@
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'WHATSAPP' from contact_type;
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'TELEGRAM' from contact_type;
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'LINKEDIN' from contact_type;
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'INSTAGRAM' from contact_type;
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'EMAIL' from contact_type;
+-- select contact_type_sequence.nextval;
+insert into contact_type (id, type) select max(id) + 1, 'TWITTER' from contact_type;

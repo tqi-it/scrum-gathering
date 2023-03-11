@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim 
+FROM openjdk:17-jdk-slim
 
 LABEL maintainer="TQI" \
       author="Jhonatan Santos"
@@ -21,7 +21,7 @@ COPY . /b
 
 WORKDIR /b/java/mentorme
 
-RUN chown -R usertqi:usertqi /b 
+RUN chown -R usertqi:usertqi /b
 
 USER $USER_NAME
 
@@ -41,4 +41,3 @@ USER usertqi
 
 
 CMD $JAVA_HOME/bin/java  -jar -Dspring.profiles.active=prod /application/mentorme-0.0.1-SNAPSHOT.jar
-

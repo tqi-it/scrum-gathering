@@ -1,0 +1,1 @@
+alter table skill alter column label type character varying(100);
