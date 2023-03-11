@@ -29,10 +29,7 @@ class MentorDetailContent extends StatelessWidget {
                 children: [
                   const Text(
                     "Posso mentorar em:",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xFF535353),
-                        fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 15, color: Color(0xFF535353), fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
                     height: 10,
@@ -46,22 +43,14 @@ class MentorDetailContent extends StatelessWidget {
                           child: Row(
                             children: mentor.skills
                                 .map((skill) => Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12, vertical: 6),
-                                      margin: EdgeInsets.only(
-                                          right: mentor.skills.last == skill
-                                              ? 0
-                                              : 15),
-                                      decoration: BoxDecoration(
-                                          color: Colors.pink,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                      margin: EdgeInsets.only(right: mentor.skills.last == skill ? 0 : 15),
+                                      decoration:
+                                          BoxDecoration(color: Colors.pink, borderRadius: BorderRadius.circular(20)),
                                       child: Text(
                                         skill,
                                         style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.white),
+                                            fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
                                       ),
                                     ))
                                 .toList(),
@@ -75,19 +64,13 @@ class MentorDetailContent extends StatelessWidget {
                   ),
                   const Text(
                     "Sobre mim:",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xFF535353),
-                        fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 15, color: Color(0xFF535353), fontWeight: FontWeight.w700),
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
                       mentor.description,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          color: Color(0xFF535353),
-                          fontWeight: FontWeight.w400),
+                      style: const TextStyle(fontSize: 15, color: Color(0xFF535353), fontWeight: FontWeight.w400),
                     ),
                   ),
                 ],
@@ -119,9 +102,8 @@ class MentorDetailContent extends StatelessWidget {
                         child: Container(
                           height: 50,
                           margin: EdgeInsets.only(
-                              right: element == mentor.contacts.last
-                                  ? 0
-                                  : ThemeDimens.smallSpace),
+                            right: element == mentor.contacts.last ? 0 : ThemeDimens.smallSpace,
+                          ),
                           child: MentorMeButton(
                             textStyle: const TextStyle(
                               fontWeight: FontWeight.w700,
@@ -133,8 +115,7 @@ class MentorDetailContent extends StatelessWidget {
                             icon: element.icon,
                             onPressed: () {
                               final controller = Modular.get<HomeController>();
-                              controller.doFetchRegisterContact(
-                                  element, mentor.id);
+                              controller.doFetchRegisterContact(element, mentor.id);
                               openUrl(element.url ?? '');
                             },
                             isActive: true,
@@ -143,40 +124,8 @@ class MentorDetailContent extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                /*children: [
-                MentorMeButton(
-                  onPressed: () {
-                    final controller = Modular.get<HomeController>();
-
-                    List<MentorMeButton> buttons = [];
-
-                    for (var element in mentor.contacts) {
-                      buttons.add(
-                        MentorMeButton(
-                          label: element.type ?? '',
-                          icon: element.icon,
-                          onPressed: () {
-                            controller.doFetchRegisterContact(element, mentor.id);
-                            openUrl(element.url ?? '');
-                          },
-                          isActive: true,
-                        ),
-                      );
-                    }
-
-                    MentorMeAlerts.showInfo(
-                      title: 'Agende sua mentoria',
-                      description:
-                          'Oi! Vamos trocar ideias sobre como posso ajudar no seu desenvolvimento pessoal e profissional.',
-                      buttons: buttons,
-                    );
-                  },
-                  label: "Fale comigo",
-                  isActive: true,
-                  radius: 6,
-                )
-              ]*/
               ),
+              const SizedBox(height: 30),
             ],
           ),
         ],
