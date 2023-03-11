@@ -79,6 +79,7 @@ class HomeController {
     FilterSkillsBottomSheet.show(
       title: 'Selecione habilidades',
       list: store.listSkills,
+      isDismissible: true,
       onTap: (List<SkillEntity> list) {
         store.listSkillsSelected = list;
         doFetchmentor();

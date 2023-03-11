@@ -60,7 +60,7 @@ class FilterSkillsBottomSheet{
                       children: [
                         Expanded(
                           child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: Column(
                               children: list
                                   .map(
@@ -79,9 +79,8 @@ class FilterSkillsBottomSheet{
                                       child: Container(
                                         margin: const EdgeInsets.only(top: 10, bottom: 10),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
-                                            Text(e.name),
                                             InkWell(
                                               onTap: () {
                                                 newState(() {
@@ -110,7 +109,9 @@ class FilterSkillsBottomSheet{
                                                 )
                                                     : Container(),
                                               ),
-                                            )
+                                            ),
+                                            const SizedBox(width: 15),
+                                            Text(e.name),
                                           ],
                                         ),
                                       ),
