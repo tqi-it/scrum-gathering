@@ -1,1 +1,0 @@
-ALTER TABLE person ADD COLUMN image_url VARCHAR(255);

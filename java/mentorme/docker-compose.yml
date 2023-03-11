@@ -1,35 +1,14 @@
-version: "3"
+version: '3.1'
+
 services:
-  postgres:
-    image: postgres:14-alpine
-    container_name: postgres
+  postgresql:
+    image: postgres
+    restart: always
+    container_name: postgresql-local
+    network_mode: bridge
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
-      POSTGRES_USER: root
       POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
       POSTGRES_DB: postgres
-  # front-dev:
-  #   image: front-dev
-  #   build:
-  #     context: ./front
-  #   container_name: front-dev
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./front/my_app:/home/my_app
-  #   restart: always
-  #   depends_on:
-  #     - postgres
-  # back-dev:
-  #   image: back-dev
-  #   build:
-  #     context: ./back
-  #   container_name: back-dev
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./back:/back
-  #   restart: always
-  #   depends_on:
-  #     - postgres

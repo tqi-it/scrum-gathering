@@ -3,6 +3,7 @@ package br.com.agile.communit.mentorme.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,11 +19,11 @@ import lombok.AllArgsConstructor;
 
 @Validated
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/contactHistory")
 public class ContactHistoryController {
 	
-	ContactHistoryService contactHistoryService;
+	private final ContactHistoryService contactHistoryService;
 
 //	@Operation(summary = "Registra o histórico de contato entre duas pessoas")
 //	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Contato registrado", content = {
