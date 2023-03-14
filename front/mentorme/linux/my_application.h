@@ -1,18 +1,18 @@
-#ifndef FLUTTER_mentormeLICATION_H_
-#define FLUTTER_mentormeLICATION_H_
+#ifndef FLUTTER_MY_APPLICATION_H_
+#define FLUTTER_MY_APPLICATION_H_
 
 #include <gtk/gtk.h>
 
-G_DECLARE_FINAL_TYPE(MyApplication, mentormelication, MY, APPLICATION,
+G_DECLARE_FINAL_TYPE(MyApplication, my_application, MY, APPLICATION,
                      GtkApplication)
 
 /**
- * mentormelication_new:
+ * my_application_new:
  *
  * Creates a new Flutter-based application.
  *
  * Returns: a new #MyApplication.
  */
-MyApplication* mentormelication_new();
+MyApplication* my_application_new();
 
-#endif  // FLUTTER_mentormeLICATION_H_
+#endif  // FLUTTER_MY_APPLICATION_H_
