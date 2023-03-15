@@ -73,15 +73,13 @@ public class PersonController {
 	@PostMapping(value = "/listMentorsBySkills")
 	public ResponseEntity<List<PersonResponse>> listMentorsBySkills(
 			@RequestBody(required = false) List<SkillRequest> skills) {
-		return (skills == null || skills.isEmpty()) ? listMentors()
-				: ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentorsBySkills(skills));
+		return ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentorsBySkills(skills));
 	}
 
 	@PostMapping(value = "/listMentoredsByInterests")
 	public ResponseEntity<List<PersonResponse>> listMentoredsByInterests(
 			@RequestBody(required = false) List<SkillRequest> skills) {
-		return (skills == null || skills.isEmpty()) ? listMentored()
-				: ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentorsBySkills(skills));
+		return ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentoredsByInterests(skills));
 	}
 
 }

@@ -82,7 +82,9 @@ public class PersonService {
 	}
 
 	public List<PersonResponse> listMentorsBySkills(List<SkillRequest> skillsRequest) {
-
+		if (skillsRequest == null || skillsRequest.isEmpty()) {
+			return listMentor();
+		}
 		List<SkillToTeach> skills = skillToTeachRepository
 				.findBySkillIn(skillsRequest.stream().map(it -> SkillRequest.toEntity(it)).collect(Collectors.toList()))
 				.orElseThrow(() -> new NotFoundException("Sem mentores para a habilidade informada"));
@@ -100,7 +102,9 @@ public class PersonService {
 	}
 
 	public List<PersonResponse> listMentoredsByInterests(List<SkillRequest> skillsRequest) {
-
+		if (skillsRequest == null || skillsRequest.isEmpty()) {
+			return listMentored();
+		}
 		List<SkillToLearn> skills = skillToLearnRepository
 				.findBySkillIn(skillsRequest.stream().map(it -> SkillRequest.toEntity(it)).collect(Collectors.toList()))
 				.orElseThrow(() -> new NotFoundException("Sem pessoas interessadas na habilidade informada"));

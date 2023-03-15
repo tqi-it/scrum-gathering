@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/contactHistory")
 public class ContactHistoryController {
-	
+
 	private final ContactHistoryService contactHistoryService;
 
 //	@Operation(summary = "Registra o histórico de contato entre duas pessoas")
