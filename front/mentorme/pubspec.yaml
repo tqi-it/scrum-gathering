@@ -21,6 +21,7 @@ dependencies:
   faker: ^2.1.0
   google_fonts: ^4.0.3
   carousel_slider: ^4.2.1
+  flutter_modular: ^5.0.3
 
 dev_dependencies:
   integration_test:
@@ -35,7 +36,6 @@ dev_dependencies:
   firebase_analytics: ^10.0.6
   firebase_crashlytics: ^3.0.6
   rx_notifier: ^1.1.0
-  flutter_modular: ^5.0.1
   flutter_secure_storage: ^4.2.1
   flutter_svg: ^1.1.6
   dartz: ^0.10.1

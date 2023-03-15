@@ -260,7 +260,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_modular:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_modular
       sha256: "061f0bcc8f8c438d4c82f4ff70a9e61f109961c92b4e1eaf1bbfab75f577fe0e"
