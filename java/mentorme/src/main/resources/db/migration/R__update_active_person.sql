@@ -1,1 +1,1 @@
-update person set active = true where active is null;
+update person set active = false where active is null;
