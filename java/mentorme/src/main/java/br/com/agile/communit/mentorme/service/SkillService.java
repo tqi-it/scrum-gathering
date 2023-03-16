@@ -14,9 +14,9 @@ import br.com.agile.communit.mentorme.model.SkillToTeach;
 import br.com.agile.communit.mentorme.repository.SkillRepository;
 import br.com.agile.communit.mentorme.repository.SkillToLearnRepository;
 import br.com.agile.communit.mentorme.repository.SkillToTeachRepository;
-import br.com.agile.communit.mentorme.request.InterestRequest;
-import br.com.agile.communit.mentorme.request.SkillRequest;
-import br.com.agile.communit.mentorme.response.SkillResponse;
+import br.com.agile.communit.mentorme.controller.request.InterestRequest;
+import br.com.agile.communit.mentorme.controller.request.SkillRequest;
+import br.com.agile.communit.mentorme.controller.response.SkillResponse;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,8 +1,5 @@
 package br.com.agile.communit.mentorme.controller;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.agile.communit.mentorme.request.ContactHistoryRequest;
-import br.com.agile.communit.mentorme.response.ContactHistoryResponse;
+import br.com.agile.communit.mentorme.controller.request.ContactHistoryRequest;
+import br.com.agile.communit.mentorme.controller.response.ContactHistoryResponse;
 import br.com.agile.communit.mentorme.service.ContactHistoryService;
-import lombok.AllArgsConstructor;
 
 @Validated
 @RestController

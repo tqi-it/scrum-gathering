@@ -1,10 +1,7 @@
 package br.com.agile.communit.mentorme.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.jvnet.hk2.annotations.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,13 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.agile.communit.mentorme.request.InterestRequest;
-import br.com.agile.communit.mentorme.request.PersonRequest;
-import br.com.agile.communit.mentorme.request.SkillRequest;
-import br.com.agile.communit.mentorme.response.PersonResponse;
-import br.com.agile.communit.mentorme.response.SkillResponse;
+import br.com.agile.communit.mentorme.controller.request.InterestRequest;
+import br.com.agile.communit.mentorme.controller.request.PersonRequest;
+import br.com.agile.communit.mentorme.controller.request.SkillRequest;
+import br.com.agile.communit.mentorme.controller.response.PersonResponse;
+import br.com.agile.communit.mentorme.controller.response.SkillResponse;
 import br.com.agile.communit.mentorme.service.PersonService;
 import br.com.agile.communit.mentorme.service.SkillService;
 import lombok.AllArgsConstructor;
@@ -70,16 +68,27 @@ public class PersonController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(skillService.addSkill(interestRequest));
 	}
 
+	@Deprecated
 	@PostMapping(value = "/listMentorsBySkills")
 	public ResponseEntity<List<PersonResponse>> listMentorsBySkills(
 			@RequestBody(required = false) List<SkillRequest> skills) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentorsBySkills(skills));
+		return ResponseEntity.status(HttpStatus.OK).body(personService.listMentorsBySkills(skills));
 	}
 
+	@Deprecated
 	@PostMapping(value = "/listMentoredsByInterests")
-	public ResponseEntity<List<PersonResponse>> listMentoredsByInterests(
-			@RequestBody(required = false) List<SkillRequest> skills) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(personService.listMentoredsByInterests(skills));
+	public ResponseEntity<List<PersonResponse>> listMentoredByInterests(@RequestBody(required = false) List<SkillRequest> skills) {
+		return ResponseEntity.status(HttpStatus.OK).body(personService.listMentoredByInterests(skills));
+	}
+
+	@GetMapping(value = "/listMentorsBySkills")
+	public ResponseEntity<List<PersonResponse>> listMentorsBySkillsIds(@RequestParam("skills-id") List<Integer> skillsIds) {
+		return ResponseEntity.status(HttpStatus.OK).body(personService.listMentorsBySkillsId(skillsIds));
+	}
+
+	@GetMapping(value = "/listMentoredByInterests")
+	public ResponseEntity<List<PersonResponse>> listMentoredByInterestsId(@RequestParam("skills-id") List<Integer> skillsIds) {
+		return ResponseEntity.status(HttpStatus.OK).body(personService.listMentoredByInterestsId(skillsIds));
 	}
 
 }

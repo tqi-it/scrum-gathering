@@ -10,7 +10,7 @@ import br.com.agile.communit.mentorme.model.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer>{
-    Optional<List<Person>> findByCanTeachOrderByNameAsc(boolean canTeach);
+    Optional<List<Person>> findByCanTeachAndActiveOrderByNameAsc(boolean canTeach, boolean active);
 
-    Optional<List<Person>> findByWantToLearnOrderByNameAsc(boolean canTeach);
+    Optional<List<Person>> findByWantToLearnAndActiveOrderByNameAsc(boolean canTeach, boolean active);
 }
