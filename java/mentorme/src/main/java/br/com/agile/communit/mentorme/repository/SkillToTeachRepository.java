@@ -13,7 +13,8 @@ import br.com.agile.communit.mentorme.model.SkillToTeach;
 public interface SkillToTeachRepository extends JpaRepository<SkillToTeach, Integer> {
 	
 	Optional<List<SkillToTeach>> findByPersonId(Integer personId);
-	
-	
-	Optional<List<SkillToTeach>> findBySkillIn(List<Skill> skills);
+
+
+	Optional<List<SkillToTeach>> findBySkillInAndPersonActive(List<Skill> skills, boolean personActive);
+	Optional<List<SkillToTeach>> findBySkillIdInAndPersonActive(List<Integer> skillsId, boolean personActive);
 }

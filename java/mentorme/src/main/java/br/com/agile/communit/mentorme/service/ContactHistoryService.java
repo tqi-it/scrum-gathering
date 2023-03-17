@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import br.com.agile.communit.mentorme.model.ContactHistory;
 import br.com.agile.communit.mentorme.model.Person;
 import br.com.agile.communit.mentorme.repository.ContactHistoryRepository;
-import br.com.agile.communit.mentorme.request.ContactHistoryRequest;
-import br.com.agile.communit.mentorme.response.ContactHistoryResponse;
+import br.com.agile.communit.mentorme.controller.request.ContactHistoryRequest;
+import br.com.agile.communit.mentorme.controller.response.ContactHistoryResponse;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
