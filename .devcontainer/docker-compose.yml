@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
+    networks:
+      - network1
     # Check if service is healthy and database "database" is created
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "database"]
@@ -31,14 +33,20 @@ services:
   back-dev:
     image: back-dev
     build:
-      context: ../back
+      context: ../java
     container_name: back-dev
     ports:
-      - "8000:8000"
+      - "9090:9090"
     environment:
-      DEV_CONTAINERS: true
+      DEV_CONTAINERS: "true"
     volumes:
-      - ../back:/back
+      - ../java:/java
+    networks:
+      - network1
     # restart: always
     depends_on:
       - postgres
+
+networks:
+  network1:
+    driver: bridge

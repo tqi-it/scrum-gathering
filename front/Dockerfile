@@ -25,11 +25,9 @@ RUN curl -C - --output android-sdk-tools.zip https://dl.google.com/android/repos
 	&& sdkmanager --install "cmdline-tools;latest"
 
 ENV FLUTTER_CHANNEL="stable"
-ENV FLUTTER_VERSION="3.7.3"
+ENV FLUTTER_VERSION="3.7.5"
 ENV FLUTTER_HOME=/root/flutter
 ENV PATH=${PATH}:${FLUTTER_HOME}/bin
-
-RUN pip3 install autopep8
 
 # Flutter SDK
 RUN curl -C - --output flutter.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_${FLUTTER_VERSION}-${FLUTTER_CHANNEL}.tar.xz
@@ -39,6 +37,8 @@ RUN flutter config --android-sdk "${ANDROID_SDK_ROOT}" \
 	&& yes | flutter doctor --android-licenses
 RUN flutter precache --no-linux --no-windows --no-macos
 RUN flutter doctor
+
+RUN git config --global --add safe.directory /root/flutter
 
 RUN mkdir -p /front
 
