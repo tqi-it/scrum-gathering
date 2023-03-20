@@ -1,6 +1,8 @@
 FROM debian:buster
 
-RUN apt update && apt install nano python3-pip git unzip curl clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev openjdk-11-jdk-headless gradle -y
+RUN apt update && apt install nano python3-pip git unzip curl clang cmake \
+	ninja-build pkg-config libgtk-3-dev liblzma-dev openjdk-11-jdk-headless \
+	gradle libjsoncpp-dev libsecret-1-dev -y
 
 # JAVA_HOME
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
