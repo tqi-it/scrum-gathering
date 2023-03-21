@@ -44,7 +44,7 @@ git clone https://github.com/tqi-it/scrum-gathering && cd scrum-gathering/ && co
 # Abra a paleta de comandos do VS Code:
 Pressione Ctrl + Shift + P
 # Pesquise e selecione "Reabrir no container" ou "Reopen in Container"
-> Dev Containers: Reopen in Container
+Dev Containers: Reopen in Container
 # Aguarde o carregamento do container - leva algum tempo.
 ```
 
