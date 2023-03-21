@@ -14,6 +14,7 @@ O App que nasceu no Scrum Gathering Rio 2023 e que vai conectar pessoas que quer
 <p align="center">
   <img src="./assets/linked_in_post.gif" />
 </p>
+
 ## Sobre
 O Mentorize é um aplicativo que conecta indivíduos com mentores experientes em suas áreas de interesse. Com este aplicativo, os usuários podem encontrar mentores que oferecem orientação, aconselhamento e apoio para ajudá-los a alcançar seus objetivos profissionais.
 
