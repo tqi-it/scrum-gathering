@@ -63,10 +63,14 @@ cd front/mentorme
 flutter clean && flutter pub get
 
 # Execute o aplicativo em modo de desenvolvimento (banco de dados local)
-flutter run --dart-define=DEV=true
+flutter run \
+--dart-define=BASE_URL=:9090 \
+--dart-define=COMPLEMENT=/ \
+--dart-define=MENTORME_ENV=http://localhost \
+--dart-define=DEV=true
 
 # Execute o aplicativo em modo de produção
-flutter run
+flutter run --dart-define=DEV=true
 
 # Você pode limpar as dependências baixadas e os arquivos de build quando necessário
 flutter clean
