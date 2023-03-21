@@ -9,7 +9,7 @@ Mentorize! 👏
 
 O App que nasceu no Scrum Gathering Rio 2023 e que vai conectar pessoas que querem receber e oferecer mentorias gratuitas [...]" - Karla Rennó
 
- Post orignal: https://www.linkedin.com/embed/feed/update/urn:li:share:7041446269222805505
+ Post orignal: https://www.linkedin.com/feed/update/urn:li:share:7041446269222805505
 
 <p align="center">
   <img src="./assets/linked_in_post.gif" />
