@@ -1,8 +1,19 @@
 # Mentorize
 
 ## Ideia inicial do projeto
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7041446269222805505" height="300" width="100%" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+"Semana passada postei que meu time e eu construiríamos um produto em 5 dias. Hoje vim contar que nós conseguimooos!!!!
 
+No gif já estamos vendo essa joinha 💎 e é com toda a alegria que apresento o
+
+Mentorize! 👏
+
+O App que nasceu no Scrum Gathering Rio 2023 e que vai conectar pessoas que querem receber e oferecer mentorias gratuitas [...]" - Karla Rennó
+
+ Post orignal: https://www.linkedin.com/embed/feed/update/urn:li:share:7041446269222805505
+
+<p align="center">
+  <img src="./assets/linked_in_post.gif" />
+</p>
 ## Sobre
 O Mentorize é um aplicativo que conecta indivíduos com mentores experientes em suas áreas de interesse. Com este aplicativo, os usuários podem encontrar mentores que oferecem orientação, aconselhamento e apoio para ajudá-los a alcançar seus objetivos profissionais.
 
