@@ -66,7 +66,7 @@ flutter clean && flutter pub get
 flutter run \
 --dart-define=BASE_URL=:9090 \
 --dart-define=COMPLEMENT=/ \
---dart-define=MENTORME_ENV=http://localhost \
+--dart-define=MENTORME_ENV=http://back-dev \
 --dart-define=DEV=true
 
 # Execute o aplicativo em modo de produção
@@ -98,6 +98,11 @@ Para usar o seu próprio banco de dados em produção, altere as variáveis do a
 front/mentorme/lib/app/shared/data/api_constants.dart
 ```
 um exemplo com os valores está comentado no mesmo arquivo.
+
+Para rodar o back-end sem a utilização do Dev Containers, altere a URL do arquivo application-local.properties
+```bash
+scrum-gathering/java/mentorme/src/main/resources
+```
 
 ## Como contribuir
 
