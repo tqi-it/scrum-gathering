@@ -10,13 +10,7 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
     networks:
-      - network1
-    # Check if service is healthy and database "database" is created
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "database"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+      - network_docker
   front-dev:
     image: front-dev
     build:
@@ -24,6 +18,8 @@ services:
     container_name: front-dev
     ports:
       - "8080:8080"
+    networks:
+      - network_docker
     volumes:
       - ../:/workspace:cached
       - ../front:/front
@@ -42,11 +38,11 @@ services:
     volumes:
       - ../java:/java
     networks:
-      - network1
+      - network_docker
     # restart: always
     depends_on:
       - postgres
 
 networks:
-  network1:
+  network_docker:
     driver: bridge
