@@ -62,7 +62,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      controller.goToHome();
+                      controller.goToRegister();
                     },
                     child: const Text(
                       "Iniciar",

@@ -21,7 +21,7 @@ class LoginModule extends Module {
     ),
     ChildRoute(
       '/onboarding',
-      child: (__, args) => const RegisterPage(),
+      child: (__, args) => OnboardingPage(),
       transition: TransitionType.rightToLeft,
     ),
     ModuleRoute('/home', module: HomeModule()),
