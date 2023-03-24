@@ -23,12 +23,29 @@ class LoginController {
   }
 
   _goToLogin() {
-    goToHome();
+    //goToHome();
+    goToRegister();
+  }
+
+  goToRegister() async {
+    await Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        Modular.to.pushReplacementNamed(
+          '/register/',
+          forRoot: true,
+          arguments: {
+            'wasLoginNow': false,
+          },
+        );
+      },
+    );
   }
 
   goToHome() async {
     await Future.delayed(
-      const Duration(milliseconds: 500), () {
+      const Duration(milliseconds: 500),
+      () {
         Modular.to.pushReplacementNamed(
           '/home/',
           forRoot: true,

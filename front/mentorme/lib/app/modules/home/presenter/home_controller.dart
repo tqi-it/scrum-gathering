@@ -69,6 +69,12 @@ class HomeController {
     );
   }
 
+  void goToRegister() {
+    Modular.to.pushNamed(
+      './register',
+    );
+  }
+
   void goToMentorProfile() {
     Modular.to.pushNamed(
       './mentor_profile_page',

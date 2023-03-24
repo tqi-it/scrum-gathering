@@ -55,7 +55,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               flex: 18,
               child: Container(
                 padding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
                   width: double.infinity,
