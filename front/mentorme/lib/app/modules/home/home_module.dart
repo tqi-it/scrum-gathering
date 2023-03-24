@@ -12,26 +12,23 @@ import 'package:mentorme/app/modules/home/presenter/home_controller.dart';
 import 'package:mentorme/app/modules/home/presenter/home_page.dart';
 import 'package:mentorme/app/modules/home/presenter/home_store.dart';
 import 'package:mentorme/app/modules/home/presenter/mentor_profile/mentor_profile_page.dart';
-
+import 'package:mentorme/app/modules/register/register_module.dart';
 
 class HomeModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind((i) => HomeController(i(), i(), i(), i())),
-    Bind((i) => HomeStore()),
-
-    Bind((i) => GetMentorMeUsecase(i())),
-    Bind((i) => GetMentorMeDatasource(i())),
-    Bind((i) => GetMentorMeRepository(i())),
-
-    Bind((i) => ContactHistoryUsecase(i())),
-    Bind((i) => ContactHistoryDatasource(i())),
-    Bind((i) => ContactHistoryRepository(i())),
-
-    Bind((i) => SkillUsecase(i())),
-    Bind((i) => SkillDatasource(i())),
-    Bind((i) => SkillRepository(i())),
-  ];
+        Bind((i) => HomeController(i(), i(), i(), i())),
+        Bind((i) => HomeStore()),
+        Bind((i) => GetMentorMeUsecase(i())),
+        Bind((i) => GetMentorMeDatasource(i())),
+        Bind((i) => GetMentorMeRepository(i())),
+        Bind((i) => ContactHistoryUsecase(i())),
+        Bind((i) => ContactHistoryDatasource(i())),
+        Bind((i) => ContactHistoryRepository(i())),
+        Bind((i) => SkillUsecase(i())),
+        Bind((i) => SkillDatasource(i())),
+        Bind((i) => SkillRepository(i())),
+      ];
 
   @override
   final List<ModularRoute> routes = [
@@ -42,8 +39,11 @@ class HomeModule extends Module {
     ),
     ChildRoute(
       '/mentor_profile_page',
-      child: (__, args) => MentorProfilePage(mentorEntity: args.data['mentor'],),
+      child: (__, args) => MentorProfilePage(
+        mentorEntity: args.data['mentor'],
+      ),
       transition: TransitionType.rightToLeft,
     ),
+    ModuleRoute('/register', module: RegisterModule()),
   ];
 }

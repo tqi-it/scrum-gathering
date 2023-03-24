@@ -13,4 +13,19 @@ class RegisterController {
     final params = RegisterParams(register);
     final response = await _registerUsecase(params);
   }
+
+  goToHome() async {
+    await Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        Modular.to.pushReplacementNamed(
+          '/home/',
+          forRoot: true,
+          arguments: {
+            'wasLoginNow': false,
+          },
+        );
+      },
+    );
+  }
 }

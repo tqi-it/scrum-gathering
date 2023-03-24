@@ -25,6 +25,5 @@ class LoginModule extends Module {
       transition: TransitionType.rightToLeft,
     ),
     ModuleRoute('/home', module: HomeModule()),
-    ModuleRoute('/register', module: RegisterModule()),
   ];
 }

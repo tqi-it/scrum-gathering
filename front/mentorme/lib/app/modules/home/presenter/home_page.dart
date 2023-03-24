@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mentorme/app/shared/components/mentor_me_button.dart';
 import 'package:mentorme/app/shared/components/mentorme_air_spin_ring.dart';
 import 'package:mentorme/app/shared/components/mentorme_content_page.dart';
 import 'package:mentorme/app/shared/theme/theme_colors.dart';
@@ -37,7 +38,8 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width,
                   color: ThemeColors.backgroundColour,
                   child: Visibility(
-                    visible: controller.store.homeState == MentorMeStates.loading,
+                    visible:
+                        controller.store.homeState == MentorMeStates.loading,
                     replacement: RefreshIndicator(
                         onRefresh: () async {
                           controller.doFetchmentor();
@@ -47,16 +49,25 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(right: 15, left: 15),
+                                margin:
+                                    const EdgeInsets.only(right: 15, left: 15),
                                 child: Column(
                                   children: [
                                     const SizedBox(height: 10),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            controller.goToRegister();
+                                          },
+                                          child: const Text("Quero mentorar"),
+                                        ),
                                         InkWell(
                                           onTap: () {
-                                            controller.openBottomsheetFilterskills();
+                                            controller
+                                                .openBottomsheetFilterskills();
                                           },
                                           child: Row(
                                             children: const [
@@ -69,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               Icon(
-                                                Icons.keyboard_arrow_down_outlined,
+                                                Icons
+                                                    .keyboard_arrow_down_outlined,
                                                 color: Color(0XFF0497E3),
                                               )
                                             ],
@@ -77,55 +89,85 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ],
                                     ),
-                                    controller.store.listSkillsSelected.isEmpty ? Container() : const SizedBox(height: 15),
+                                    controller.store.listSkillsSelected.isEmpty
+                                        ? Container()
+                                        : const SizedBox(height: 15),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SingleChildScrollView(
-                                          physics: const BouncingScrollPhysics(),
+                                          physics:
+                                              const BouncingScrollPhysics(),
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
-                                            children: controller.store.listSkillsSelected
+                                            children: controller
+                                                .store.listSkillsSelected
                                                 .map(
                                                   (e) => Container(
-                                                padding: const EdgeInsets.only(left: 13, right: 13),
-                                                margin: EdgeInsets.only(
-                                                    right: controller.store.listSkillsSelected.last == e ? 0 : 10),
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(50),
-                                                  border: Border.all(
-                                                    color: const Color(0xFF535353),
-                                                  ),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      e.name,
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xFF535353),
-                                                        fontWeight: FontWeight.w400,
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 13,
+                                                            right: 13),
+                                                    margin: EdgeInsets.only(
+                                                        right: controller
+                                                                    .store
+                                                                    .listSkillsSelected
+                                                                    .last ==
+                                                                e
+                                                            ? 0
+                                                            : 10),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                      border: Border.all(
+                                                        color: const Color(
+                                                            0xFF535353),
                                                       ),
                                                     ),
-                                                    const SizedBox(width: 10),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller.store.listSkillsSelected.remove(e);
-                                                        controller.doFetchmentor();
-                                                      },
-                                                      child: const Icon(
-                                                        Icons.close,
-                                                        color: Color(0xFF535353),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ).toList(),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          e.name,
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xFF535353),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            controller.store
+                                                                .listSkillsSelected
+                                                                .remove(e);
+                                                            controller
+                                                                .doFetchmentor();
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.close,
+                                                            color: Color(
+                                                                0xFF535353),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList(),
                                           ),
                                         ),
-                                        controller.store.listSkillsSelected.isEmpty ? Container() : const SizedBox(height: 10),
+                                        controller.store.listSkillsSelected
+                                                .isEmpty
+                                            ? Container()
+                                            : const SizedBox(height: 10),
                                       ],
                                     )
                                   ],
@@ -133,8 +175,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                               controller.store.listMentors.isEmpty
                                   ? Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: const [
                                         Text(
                                           'Nenhum mentor encontrado!',
@@ -150,12 +194,16 @@ class _HomePageState extends State<HomePage> {
                                       children: controller.store.listMentors
                                           .map(
                                             (e) => Container(
-                                              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 5),
                                               child: MentorCardWidget(
                                                 mentor: e,
                                               ),
                                             ),
-                                          ).toList(),
+                                          )
+                                          .toList(),
                                     ),
                             ],
                           ),
