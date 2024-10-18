@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mentorme/app/core/domain/entities/mentor_entity.dart';
-import 'package:mentorme/app/modules/home/presenter/home_controller.dart';
-import 'package:mentorme/app/shared/components/mentor_me_button.dart';
-import 'package:mentorme/app/shared/components/mentorme_alert.dart';
-import 'package:mentorme/app/shared/theme/images.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void openUrl(String url) async {
   if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
-    throw Exception("Error kdjsdksjdks");
+    throw Exception("Error");
   }
 }
 
@@ -23,10 +19,9 @@ class MentorCardWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (mentor.active) {
-          Modular.to.pushNamed('/home/mentor_profile_page',
-              arguments: {
-                'mentor': mentor,
-              });
+          Modular.to.pushNamed('/home/mentor_profile_page', arguments: {
+            'mentor': mentor,
+          });
         }
       },
       child: Card(
@@ -55,51 +50,45 @@ class MentorCardWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    left: 12, top: 1, right: 12),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 12, top: 1, right: 12),
+                              child: Text(
+                                mentor.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF535353),
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                              child: SizedBox(
+                                width: double.infinity,
                                 child: Text(
-                                  mentor.name,
+                                  mentor.description,
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                     color: Color(0xFF535353),
-                                    fontSize: 18,
+                                    fontSize: 16,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
                                 ),
                               ),
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 2),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    mentor.description,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      color: Color(0xFF535353),
-                                      fontSize: 16,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Expanded(
@@ -108,26 +97,21 @@ class MentorCardWidget extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       child: Row(
                         children: mentor.skills
-                            .map((skill) => Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
-                          margin: EdgeInsets.only(
-                              right: mentor.skills.last == skill
-                                  ? 0
-                                  : 15),
-                          decoration: BoxDecoration(
-                              color: Colors.pink,
-                              borderRadius:
-                              BorderRadius.circular(20)),
-                          child: Text(
-                            skill,
-                            style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
-                          ),
-                        ))
-                            .toList(),
+                            .map(
+                              (skill) => Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: EdgeInsets.only(right: mentor.skills.last == skill ? 0 : 15),
+                                decoration: BoxDecoration(color: Colors.pink, borderRadius: BorderRadius.circular(20)),
+                                child: Text(
+                                  skill,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ).toList(),
                       ),
                     ),
                   )

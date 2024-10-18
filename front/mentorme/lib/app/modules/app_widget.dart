@@ -32,10 +32,10 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver{
 
     return MaterialApp.router(
       title: 'MentorME',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.pink,
         fontFamily: GoogleFonts.roboto().fontFamily,
-        // colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFD9385E)),
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
